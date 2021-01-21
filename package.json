@@ -4,12 +4,14 @@
   "description": "OutSystems Cordova Plugin to provide the functionality of a file viewer to mobile applications.",
   "keywords": [
     "ecosystem:cordova",
-    "cordova-android"
+    "cordova-android",
+    "cordova-ios"
   ],
   "cordova": {
     "id": "com.outsystems.plugins.fileviewer",
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   },
   "engines": []

@@ -15,4 +15,13 @@
     <config-file parent="/*" target="AndroidManifest.xml"/>
     <source-file src="src/android/com/outsystems/plugins/fileviewer/OSFileViewer.java" target-dir="src/com/outsystems/plugins/fileviewer"/>
   </platform>
+  <platform name="ios">
+    <config-file parent="/*" target="config.xml">
+      <feature name="OSFileViewer">
+        <param name="ios-package" value="OSFileViewer"/>
+      </feature>
+    </config-file>
+    <source-file src="src/ios/OSFileViewer.m"/>
+    <header-file src="src/ios/OSFileViewer.h"/>
+  </platform>
 </plugin>
