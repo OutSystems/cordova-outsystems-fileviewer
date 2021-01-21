@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com.outsystems.plugins.fileviewer" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>OSFileViewer</name>
+    <description>OutSystems Cordova Plugin to provide the functionality of a file viewer to mobile applications.</description>
+    <author>OutSystems Inc</author>
+    <js-module name="OSFileViewer" src="www/OSFileViewer.js">
+        <clobbers target="cordova.plugins.OSFileViewer" />
+    </js-module>
+</plugin>
