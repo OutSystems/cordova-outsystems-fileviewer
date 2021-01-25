@@ -1,5 +1,17 @@
 var exec = require('cordova/exec');
 
-exports.coolMethod = function (arg0, success, error) {
-    exec(success, error, 'OSFileViewer', 'coolMethod', [arg0]);
+exports.previewDocumentFromLocalPath = function (filePath, fileMIMEType, success, error) {
+    exec(success, error, 'OSFileViewer', 'previewDocumentFromLocalPath', [filePath, fileMIMEType]);
+};
+
+exports.previewDocumentFromUrl = function (url, fileMIMEType, success, error) {
+    exec(success, error, 'OSFileViewer', 'previewDocumentFromUrl', [url, fileMIMEType]);
+};
+
+exports.openDocumentFromLocalPath = function (filePath, fileMIMEType, success, error) {
+    exec(success, error, 'OSFileViewer', 'openDocumentFromLocalPath', [filePath, fileMIMEType]);
+};
+
+exports.openDocumentFromUrl = function (url, fileMIMEType, success, error) {
+    exec(success, error, 'OSFileViewer', 'openDocumentFromUrl', [url, fileMIMEType]);
 };
