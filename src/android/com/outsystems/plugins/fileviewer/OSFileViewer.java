@@ -21,7 +21,7 @@ public class OSFileViewer extends CordovaPlugin {
             this.previewDocumentFromLocalPath(args, callbackContext);
             return true;
         }
-        else if (action.equals(KEY_ACTION_PREVIEW_DOCUMENT_FROM_URL) {
+        else if (action.equals(KEY_ACTION_PREVIEW_DOCUMENT_FROM_URL)) {
             this.previewDocumentFromUrl(args, callbackContext);
             return true;
         }
