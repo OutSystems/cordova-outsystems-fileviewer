@@ -1,10 +1,11 @@
 #import <Cordova/CDV.h>
 
-@interface OSFileViewer : CDVPlugin
+@interface OSDocumentViewer : CDVPlugin
 
-- (void)coolMethod:(CDVInvokedUrlCommand*)command;
-
--(NSString*)publicHelloWorld;
-
+- (void)previewDocumentFromLocalPath:(CDVInvokedUrlCommand*)command;
+- (void)previewDocumentFromUrl:(CDVInvokedUrlCommand*)command;
+- (void)openDocumentFromLocalPath:(CDVInvokedUrlCommand*)command;
+- (void)openDocumentFromUrl:(CDVInvokedUrlCommand*)command;
+- (void)previewMediaContent:(CDVInvokedUrlCommand*)command;
 
 @end
