@@ -5,7 +5,8 @@
 - (void)previewDocumentFromLocalPath:(CDVInvokedUrlCommand*)command
 {
     CDVPluginResult* pluginResult = nil;
-    NSString* echo = [command.arguments objectAtIndex:0];
+    NSString* filePath = [command.arguments objectAtIndex:0];
+    NSString* fileMIMEType = [command.arguments objectAtIndex:0];
 
     if (echo != nil && [echo length] > 0) {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:echo];
