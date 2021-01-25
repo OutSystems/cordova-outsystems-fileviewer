@@ -9,30 +9,56 @@ import org.json.JSONObject;
 
 public class OSFileViewer extends CordovaPlugin {
 
+    private final static String KEY_ACTION_PREVIEW_DOCUMENT_FROM_FILE_PATH = "previewDocumentFromLocalPath";
+    private final static String KEY_ACTION_PREVIEW_DOCUMENT_FROM_URL = "previewDocumentFromUrl";
+    private final static String KEY_ACTION_OPEN_DOCUMENT_FROM_FILE_PATH = "openDocumentFromLocalPath";
+    private final static String KEY_ACTION_OPEN_DOCUMENT_FROM_URL = "openDocumentFromUrl";
+    private final static String KEY_ACTION_PREVIEW_MEDIA_CONTENT = "previewMediaContent";
+
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if (action.equals("coolMethod")) {
-            String message = args.getString(0);
-            this.coolMethod(message, callbackContext);
+        if (action.equals(KEY_ACTION_PREVIEW_DOCUMENT_FROM_FILE_PATH)) {
+            this.previewDocumentFromLocalPath(args, callbackContext);
+            return true;
+        }
+        else if (action.equals(KEY_ACTION_PREVIEW_DOCUMENT_FROM_URL) {
+            this.previewDocumentFromUrl(args, callbackContext);
+            return true;
+        }
+        else if (action.equals(KEY_ACTION_OPEN_DOCUMENT_FROM_FILE_PATH)) {
+            this.openDocumentFromLocalPath(args, callbackContext);
+            return true;
+        }
+        else if (action.equals(KEY_ACTION_PREVIEW_DOCUMENT_FROM_URL)) {
+            this.openDocumentFromUrl(args, callbackContext);
+            return true;
+        }
+        else if (action.equals(KEY_ACTION_PREVIEW_MEDIA_CONTENT)) {
+            this.previewMediaContent(args, callbackContext);
             return true;
         }
         return false;
     }
 
-    private void coolMethod(String message, CallbackContext callbackContext) {
-        if (message != null && message.length() > 0) {
-            callbackContext.success(message);
-        } else {
-            callbackContext.error("Expected one non-empty string argument.");
-        }
+    private void previewDocumentFromLocalPath(JSONArray args, CallbackContext callbackContext) {
+        alert("preview document from local path");
     }
 
-    protected String privateHelloWorldString() {
-        return "Hello World";
+    private void previewDocumentFromUrl(JSONArray args, CallbackContext callbackContext) {
+        alert("preview document from url");
     }
 
-    public String publicHelloWorld() {
-        return this.privateHelloWorldString();
+    private void openDocumentFromLocalPath(JSONArray args, CallbackContext callbackContext) {
+        alert("open document from local path");
     }
+
+    private void openDocumentFromUrl(JSONArray args, CallbackContext callbackContext) {
+        alert("open document from url");
+    }
+
+    private void previewMediaContent(JSONArray args, CallbackContext callbackContext) {
+        alert("preview media content");
+    }
+
 
 }
