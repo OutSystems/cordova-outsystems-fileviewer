@@ -41,23 +41,23 @@ public class OSFileViewer extends CordovaPlugin {
     }
 
     private void previewDocumentFromLocalPath(JSONArray args, CallbackContext callbackContext) {
-        alert("preview document from local path");
+        //TODO
     }
 
     private void previewDocumentFromUrl(JSONArray args, CallbackContext callbackContext) {
-        alert("preview document from url");
+        //TODO
     }
 
     private void openDocumentFromLocalPath(JSONArray args, CallbackContext callbackContext) {
-        alert("open document from local path");
+        //TODO
     }
 
     private void openDocumentFromUrl(JSONArray args, CallbackContext callbackContext) {
-        alert("open document from url");
+        //TODO
     }
 
     private void previewMediaContent(JSONArray args, CallbackContext callbackContext) {
-        alert("preview media content");
+        //TODO
     }
 
 
