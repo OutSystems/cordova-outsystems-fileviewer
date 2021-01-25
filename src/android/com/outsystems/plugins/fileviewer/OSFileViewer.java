@@ -29,7 +29,7 @@ public class OSFileViewer extends CordovaPlugin {
             this.openDocumentFromLocalPath(args, callbackContext);
             return true;
         }
-        else if (action.equals(KEY_ACTION_PREVIEW_DOCUMENT_FROM_URL)) {
+        else if (action.equals(KEY_ACTION_OPEN_DOCUMENT_FROM_URL)) {
             this.openDocumentFromUrl(args, callbackContext);
             return true;
         }
