@@ -53,7 +53,19 @@ public class OSFileViewer extends CordovaPlugin {
     }
 
     private void openDocumentFromUrl(JSONArray args, CallbackContext callbackContext) {
-        //TODO
+        String url = null;
+        try {
+            url = args.getString(0);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        try{
+            this.cordova.getActivity().startActivity(intent);
+            callbackContext.success();
+        } catch (ActivityNotFoundException e) {
+            callbackContext.error("There is no app to open this document.");
+        }
     }
 
     private void previewMediaContent(JSONArray args, CallbackContext callbackContext) {
