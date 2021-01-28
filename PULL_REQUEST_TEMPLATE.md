@@ -15,6 +15,7 @@
 ## Platforms affected
 - [ ] Android
 - [ ] iOS
+- [ ] JavaScript
 
 ## Tests
 <!--- Describe how you tested your changes in detail -->
