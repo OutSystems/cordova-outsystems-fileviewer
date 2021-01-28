@@ -25,7 +25,7 @@
     
     <source-file src="src/ios/CDVFileViewer.swift"/>
     <source-file src="src/ios/FileDownloader.swift"/>
-    <source-file src="src/ios/FileViewerErros.swift"/>
+    <source-file src="src/ios/FileViewerErrors.swift"/>
     <source-file src="src/ios/FileViewerPlugin.swift"/>
     <source-file src="src/ios/FileViewerPreview.swift"/>
     <source-file src="src/ios/FileViewerViewController.swift"/>
