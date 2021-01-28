@@ -20,7 +20,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="src/android/xml/file_viewer_paths"/>
+                android:resource="@xml/file_viewer_paths"/>
         </provider>
     </config-file>
     <config-file parent="/*" target="AndroidManifest.xml"/>
