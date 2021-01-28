@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 
 import androidx.core.content.FileProvider;
@@ -34,6 +35,9 @@ public class OSFileViewer extends CordovaPlugin {
     public static final int READ = 4;
 
     private static final String LOG_TAG = "FileViewer";
+
+    //Request code for selecting a PDF document
+    private static final int PICK_PDF_FILE = 2;
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -78,19 +82,35 @@ public class OSFileViewer extends CordovaPlugin {
             e.printStackTrace();
         }
 
-        if(needPermission(filePath, READ)){
-            getReadPermission();
+        //if API is lower or equal than API 28 OR (||) file is inside sandbox, open directly
+        //still missing the code to check if file is inside sandbox, for it to open directly as well
+
+        //when I have the check if file is in sandbox code implemented, uncomment if else logic below.
+
+        Intent intent = null;
+
+        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.P){
+            //ask for permissions and open file directly
+
+            if(needPermission(filePath, READ)){
+                getReadPermission();
+            }
+
+            File file = new File(filePath.replace("file:///", ""));
+            Uri contentUri = FileProvider.getUriForFile(this.cordova.getActivity().getApplicationContext(), this.cordova.getActivity().getPackageName() + ".opener.provider", file);
+
+            intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(contentUri, mimeType);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
         }
-
-        //using the FileProvider and the getUriForFile, as it explains in the Android documentation for FileProvider
-
-        File file = new File(filePath.replace("file:///", ""));
-        Uri contentUri = FileProvider.getUriForFile(this.cordova.getActivity().getApplicationContext(), this.cordova.getActivity().getPackageName() + ".opener.provider", file);
-
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(contentUri, mimeType);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        else{ //API level higher than 28 and file outside app sandbox
+            //open with file chooser
+            intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType(mimeType);
+        }
 
         try{
             this.cordova.getActivity().startActivity(intent);
