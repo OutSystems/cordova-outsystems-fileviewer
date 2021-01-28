@@ -36,4 +36,5 @@
     <source-file src="src/ios/OSFileViewer.m"/>
     <header-file src="src/ios/OSFileViewer.h"/>
   </platform>
+  <dependency id="cordova-androidx-build" url="https://github.com/andregrillo/cordova-androidx-build.git"/>
 </plugin>
