@@ -29,6 +29,7 @@ public class OSFileViewer extends CordovaPlugin {
     private final static String KEY_ACTION_OPEN_DOCUMENT_FROM_FILE_PATH = "openDocumentFromLocalPath";
     private final static String KEY_ACTION_OPEN_DOCUMENT_FROM_URL = "openDocumentFromUrl";
     private final static String KEY_ACTION_PREVIEW_MEDIA_CONTENT = "previewMediaContent";
+    private final static String KEY_ACTION_OPEN_FILE_CHOOSER = "openFileChooser";
 
     //permission codes
     public static final int WRITE = 3;
@@ -59,6 +60,10 @@ public class OSFileViewer extends CordovaPlugin {
         }
         else if (action.equals(KEY_ACTION_PREVIEW_MEDIA_CONTENT)) {
             this.previewMediaContent(args, callbackContext);
+            return true;
+        }
+        else if (action.equals(KEY_ACTION_OPEN_FILE_CHOOSER)) {
+            this.openFileChooser(args, callbackContext);
             return true;
         }
         return false;
@@ -139,6 +144,26 @@ public class OSFileViewer extends CordovaPlugin {
 
     private void previewMediaContent(JSONArray args, CallbackContext callbackContext) {
         //TODO
+    }
+
+    /**
+     * Method to open the file chooser, when the user wants to open files from outside the app sandbox
+     * @param args
+     * @param callbackContext
+     */
+    private void openFileChooser(JSONArray args, CallbackContext callbackContext) {
+
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.setType("*/*");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        try {
+            this.cordova.getActivity().startActivityForResult(
+                    Intent.createChooser(intent, "Select a file to open"),
+                    0);
+        } catch (ActivityNotFoundException ex) {
+            callbackContext.error("There is no app to open this document.");
+        }
     }
 
     private boolean needPermission(String nativeURL, int permissionType) throws JSONException {
