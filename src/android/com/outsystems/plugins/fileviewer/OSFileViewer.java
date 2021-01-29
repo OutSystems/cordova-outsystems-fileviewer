@@ -126,6 +126,11 @@ public class OSFileViewer extends CordovaPlugin {
 
     }
 
+    /**
+     * Method to open a document from an URL
+     * @param args
+     * @param callbackContext
+     */
     private void openDocumentFromUrl(JSONArray args, CallbackContext callbackContext) {
         String url = null;
         try {
