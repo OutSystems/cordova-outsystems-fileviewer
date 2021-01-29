@@ -4,7 +4,7 @@
   <description>OutSystems Cordova Plugin to provide the functionality of a file viewer to mobile applications.</description>
   <author>OutSystems Inc</author>
   <js-module name="OSFileViewer" src="www/OSFileViewer.js">
-    <clobbers target="cordova.FileViewer"/>
+    <clobbers target="cordova.plugins.OSFileViewer"/>
   </js-module>
   <platform name="android">
     <config-file parent="/*" target="res/xml/config.xml">
