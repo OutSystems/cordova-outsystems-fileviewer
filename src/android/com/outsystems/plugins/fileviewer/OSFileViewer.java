@@ -77,6 +77,12 @@ public class OSFileViewer extends CordovaPlugin {
         //TODO
     }
 
+    /**
+     * Method to open files from local paths (from inside the app sandbox)
+     * @param args
+     * @param callbackContext
+     * @throws JSONException
+     */
     private void openDocumentFromLocalPath(JSONArray args, CallbackContext callbackContext) throws JSONException {
         String filePath = null;
         String mimeType = null;
@@ -87,35 +93,13 @@ public class OSFileViewer extends CordovaPlugin {
             e.printStackTrace();
         }
 
-        //if API is lower or equal than API 28 OR (||) file is inside sandbox, open directly
-        //still missing the code to check if file is inside sandbox, for it to open directly as well
+        File file = new File(filePath.replace("file:///", ""));
+        Uri contentUri = FileProvider.getUriForFile(this.cordova.getActivity().getApplicationContext(), this.cordova.getActivity().getPackageName() + ".opener.provider", file);
 
-        //when I have the check if file is in sandbox code implemented, uncomment if else logic below.
-
-        Intent intent = null;
-
-        if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.P){
-            //ask for permissions and open file directly
-
-            if(needPermission(filePath, READ)){
-                getReadPermission();
-            }
-
-            File file = new File(filePath.replace("file:///", ""));
-            Uri contentUri = FileProvider.getUriForFile(this.cordova.getActivity().getApplicationContext(), this.cordova.getActivity().getPackageName() + ".opener.provider", file);
-
-            intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(contentUri, mimeType);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-        }
-        else{ //API level higher than 28 and file outside app sandbox
-            //open with file chooser
-            intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
-            intent.setType(mimeType);
-        }
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(contentUri, mimeType);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
         try{
             this.cordova.getActivity().startActivity(intent);
