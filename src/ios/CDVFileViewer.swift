@@ -5,7 +5,7 @@ import PDFKit
 
 var callbackId:String=""
 
-@objc(OSFileViewer)
+@objc(CDVFileViewer)
 class CDVFileViewer : CDVPlugin {
     
     var plugin: FileViewerPlugin!
