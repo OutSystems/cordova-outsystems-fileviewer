@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
+import android.webkit.MimeTypeMap;
 
 import androidx.core.content.FileProvider;
 
@@ -96,6 +97,10 @@ public class OSFileViewer extends CordovaPlugin {
         }
 
         if (isPathValid(filePath)) {
+
+            if(mimeType.equals("")){
+                mimeType = getMimeType(filePath);
+            }
 
             File file = new File(filePath.replace("file:///", ""));
             Uri contentUri = FileProvider.getUriForFile(this.cordova.getActivity().getApplicationContext(), this.cordova.getActivity().getPackageName() + ".opener.provider", file);
@@ -186,6 +191,15 @@ public class OSFileViewer extends CordovaPlugin {
             Log.e("FileViewer", e.toString());
         }
         return jsonObject;
+    }
+
+    public static String getMimeType(String url) {
+        String type = null;
+        String extension = MimeTypeMap.getFileExtensionFromUrl(url);
+        if (extension != null) {
+            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
+        }
+        return type;
     }
 
 }
