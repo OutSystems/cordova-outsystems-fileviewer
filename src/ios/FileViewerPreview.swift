@@ -22,7 +22,7 @@ class FileViewerPreview {
     func openDocumentFromLocalPath(url:URL) throws {
         DispatchQueue.main.async {
             let previewController = QLPreviewController()
-            self.previewItem = url as NSURL
+            self.previewItem = url.standardized as NSURL
             previewController.dataSource = self
             self.viewController?.present(previewController, animated: true, completion: nil)
         }
@@ -38,7 +38,7 @@ class FileViewerPreview {
         FileDownloader.downloadfile(url: url, completion: {(success, fileLocationURL) in
             if success {
                 DispatchQueue.main.async {
-                    self.previewItem = fileLocationURL! as NSURL
+                    self.previewItem = fileLocationURL!.standardized as NSURL
                     let previewController = QLPreviewController()
                     previewController.dataSource = self
                     self.viewController?.present(previewController, animated: true, completion: nil)
@@ -53,7 +53,7 @@ class FileViewerPreview {
             throw FileViewerErros.couldNotOpenDocument
         }
         
-        let player = AVPlayer(url: url)
+        let player = AVPlayer(url: url.standardized)
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
         viewController?.present(playerViewController, animated: true) {
