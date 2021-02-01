@@ -7,16 +7,11 @@
 
 import Foundation
 
-enum FileViewerErros: Error {
-    case empty
-    case couldNotOpenDocument
-    
-    var description: String {
-        switch self {
-        case .empty:
-            return "The file is empty"
-        case .couldNotOpenDocument:
-            return "Could not open the document"
-        }
-    }
+enum FileViewerErrors: String, Error {
+    case empty = "The file is empty"
+    case couldNotOpenDocument = "Could not open the document"
+}
+
+extension FileViewerErrors : LocalizedError {
+    var errorDescription: String? { return NSLocalizedString(rawValue, comment: "") }
 }

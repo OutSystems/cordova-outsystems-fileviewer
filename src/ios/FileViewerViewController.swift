@@ -27,10 +27,10 @@ class FileViewerViewController: UIViewController {
     
     func openDocumentFromUrl(url:URL) throws {
         guard let data = try? Data(contentsOf: url.standardized) else {
-            throw FileViewerErros.couldNotOpenDocument
+            throw FileViewerErrors.couldNotOpenDocument
         }
         
-        guard let document = PDFDocument(data: data) else {throw FileViewerErros.couldNotOpenDocument }
+        guard let document = PDFDocument(data: data) else {throw FileViewerErrors.couldNotOpenDocument }
         pdfView.autoScales = true
         pdfView.document = document
 
