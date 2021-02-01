@@ -26,7 +26,7 @@ class FileViewerViewController: UIViewController {
     }
     
     func openDocumentFromUrl(url:URL) throws {
-        guard let data = try? Data(contentsOf: url) else {
+        guard let data = try? Data(contentsOf: url.standardized) else {
             throw FileViewerErros.couldNotOpenDocument
         }
         
