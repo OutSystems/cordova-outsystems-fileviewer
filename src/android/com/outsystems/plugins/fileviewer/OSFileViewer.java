@@ -95,7 +95,7 @@ public class OSFileViewer extends CordovaPlugin {
             return;
         }
 
-        if (filePath != null || filePath.length() > 0) {
+        if (isPathValid(url)) {
 
             File file = new File(filePath.replace("file:///", ""));
             Uri contentUri = FileProvider.getUriForFile(this.cordova.getActivity().getApplicationContext(), this.cordova.getActivity().getPackageName() + ".opener.provider", file);
@@ -131,7 +131,7 @@ public class OSFileViewer extends CordovaPlugin {
             return;
         }
 
-        if (url != null || url.length() > 0) {
+        if (isPathValid(url)) {
 
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             try {
@@ -168,6 +168,15 @@ public class OSFileViewer extends CordovaPlugin {
         }
     }
 
+    /**
+     * boolean method to check if a given file path or url is valid
+     * @param path - the file path or url to check
+     * @return true if path is valid, false otherwise
+     */
+    private boolean isPathValid(String path){
+        return (path != null && path.length() > 0);
+    }
+
     private JSONObject buildErrorResponse(int errorCode, String errorMessage) {
         JSONObject jsonObject = new JSONObject();
         try {
@@ -178,5 +187,5 @@ public class OSFileViewer extends CordovaPlugin {
         }
         return jsonObject;
     }
-    
+
 }
