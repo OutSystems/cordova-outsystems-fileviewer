@@ -95,7 +95,7 @@ public class OSFileViewer extends CordovaPlugin {
             return;
         }
 
-        if (isPathValid(url)) {
+        if (isPathValid(filePath)) {
 
             File file = new File(filePath.replace("file:///", ""));
             Uri contentUri = FileProvider.getUriForFile(this.cordova.getActivity().getApplicationContext(), this.cordova.getActivity().getPackageName() + ".opener.provider", file);
