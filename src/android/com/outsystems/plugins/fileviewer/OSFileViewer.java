@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.util.Log;
 
 import androidx.core.content.FileProvider;
 
@@ -167,67 +168,15 @@ public class OSFileViewer extends CordovaPlugin {
         }
     }
 
-    private boolean needPermission(String nativeURL, int permissionType) throws JSONException {
-        JSONObject j = requestAllPaths();
-        ArrayList<String> allowedStorageDirectories = new ArrayList<String>();
-        allowedStorageDirectories.add(j.getString("applicationDirectory"));
-        allowedStorageDirectories.add(j.getString("applicationStorageDirectory"));
-        if(j.has("externalApplicationStorageDirectory")) {
-            allowedStorageDirectories.add(j.getString("externalApplicationStorageDirectory"));
+    private JSONObject buildErrorResponse(int errorCode, String errorMessage) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("error_code", errorCode);
+            jsonObject.put("error_message", errorMessage);
+        } catch (JSONException e) {
+            Log.e("FileViewer", e.toString());
         }
-
-        if(permissionType == READ && hasReadPermission()) {
-            return false;
-        }
-        else if(permissionType == WRITE && hasWritePermission()) {
-            return false;
-        }
-
-        // Permission required if the native url lies outside the allowed storage directories
-        for(String directory : allowedStorageDirectories) {
-            if(nativeURL.startsWith(directory)) {
-                return false;
-            }
-        }
-        return true;
+        return jsonObject;
     }
-
-    private JSONObject requestAllPaths() throws JSONException {
-        Context context = cordova.getActivity();
-        JSONObject ret = new JSONObject();
-        ret.put("applicationDirectory", "file:///android_asset/");
-        ret.put("applicationStorageDirectory", toDirUrl(context.getFilesDir().getParentFile()));
-        ret.put("dataDirectory", toDirUrl(context.getFilesDir()));
-        ret.put("cacheDirectory", toDirUrl(context.getCacheDir()));
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            try {
-                ret.put("externalApplicationStorageDirectory", toDirUrl(context.getExternalFilesDir(null).getParentFile()));
-                ret.put("externalDataDirectory", toDirUrl(context.getExternalFilesDir(null)));
-                ret.put("externalCacheDirectory", toDirUrl(context.getExternalCacheDir()));
-                ret.put("externalRootDirectory", toDirUrl(Environment.getExternalStorageDirectory()));
-            }
-            catch(NullPointerException e) {
-                /* If external storage is unavailable, context.getExternal* returns null */
-                LOG.d(LOG_TAG, "Unable to access these paths, most liklely due to USB storage");
-            }
-        }
-        return ret;
-    }
-
-    private static String toDirUrl(File f) {
-        return Uri.fromFile(f).toString() + '/';
-    }
-
-    private boolean hasReadPermission() {
-        return PermissionHelper.hasPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-    }
-
-    private boolean hasWritePermission() {
-        return PermissionHelper.hasPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-    }
-
-    private void getReadPermission() {
-        PermissionHelper.requestPermission(this, 1, Manifest.permission.READ_EXTERNAL_STORAGE);
-    }
-
+    
 }
