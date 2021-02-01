@@ -90,24 +90,30 @@ public class OSFileViewer extends CordovaPlugin {
             filePath = args.getString(0);
             mimeType = args.getString(1);
         } catch (JSONException e) {
-            e.printStackTrace();
+            callbackContext.error(buildErrorResponse(1, "Invalid arguments"));
+            return;
         }
 
-        File file = new File(filePath.replace("file:///", ""));
-        Uri contentUri = FileProvider.getUriForFile(this.cordova.getActivity().getApplicationContext(), this.cordova.getActivity().getPackageName() + ".opener.provider", file);
+        if (filePath != null || filePath.length() > 0) {
 
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(contentUri, mimeType);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            File file = new File(filePath.replace("file:///", ""));
+            Uri contentUri = FileProvider.getUriForFile(this.cordova.getActivity().getApplicationContext(), this.cordova.getActivity().getPackageName() + ".opener.provider", file);
 
-        try{
-            this.cordova.getActivity().startActivity(intent);
-            callbackContext.success();
-        } catch (ActivityNotFoundException e) {
-            callbackContext.error("There is no app to open this document.");
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(contentUri, mimeType);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            try {
+                this.cordova.getActivity().startActivity(intent);
+                callbackContext.success();
+            } catch (ActivityNotFoundException e) {
+                callbackContext.error(buildErrorResponse(5, "There is no app to open this document"));
+            }
+            return;
         }
 
+        callbackContext.error(buildErrorResponse(2, "Path of the file to open is invalid"));
     }
 
     /**
@@ -120,15 +126,23 @@ public class OSFileViewer extends CordovaPlugin {
         try {
             url = args.getString(0);
         } catch (JSONException e) {
-            e.printStackTrace();
+            callbackContext.error(buildErrorResponse(1, "Invalid arguments"));
+            return;
         }
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        try{
-            this.cordova.getActivity().startActivity(intent);
-            callbackContext.success();
-        } catch (ActivityNotFoundException e) {
-            callbackContext.error("There is no app to open this document.");
+
+        if (url != null || url.length() > 0) {
+
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            try {
+                this.cordova.getActivity().startActivity(intent);
+                callbackContext.success();
+            } catch (ActivityNotFoundException e) {
+                callbackContext.error(buildErrorResponse(5, "There is no app to open this document"));
+            }
+            return;
         }
+
+        callbackContext.error(buildErrorResponse(2, "URL to open is invalid"));
     }
 
     private void previewMediaContent(JSONArray args, CallbackContext callbackContext) {
@@ -141,17 +155,15 @@ public class OSFileViewer extends CordovaPlugin {
      * @param callbackContext
      */
     private void openFileChooser(JSONArray args, CallbackContext callbackContext) {
-
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.setType("*/*");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-
         try {
             this.cordova.getActivity().startActivityForResult(
                     Intent.createChooser(intent, "Select a file to open"),
                     0);
         } catch (ActivityNotFoundException ex) {
-            callbackContext.error("There is no app to open this document.");
+            callbackContext.error(buildErrorResponse(6, "There is no app to browse files with"));
         }
     }
 
