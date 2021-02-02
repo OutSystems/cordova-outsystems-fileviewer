@@ -16,14 +16,13 @@ class CDVFileViewer : CDVPlugin {
 
     @objc(previewDocumentFromLocalPath:)
     func previewDocumentFromLocalPath(command: CDVInvokedUrlCommand) {
+        
         let filePath = command.arguments[0] as? String ?? ""
-        if !filePath.isEmpty {
+        do {
             let url = URL(fileURLWithPath: filePath)
-            do {
-                try plugin.previewDocumentFromLocaPath(url: url)
-            } catch let error {
-                sendResult(result: "", error: error.localizedDescription)
-            }
+            try plugin.previewDocumentFromLocalPath(url: url)
+        } catch {
+            sendResult(result: "", error: error.localizedDescription)
         }
 
     }
@@ -31,49 +30,41 @@ class CDVFileViewer : CDVPlugin {
     @objc(previewDocumentFromUrl:)
     func previewDocumentFromUrl(command: CDVInvokedUrlCommand) {
         let url = command.arguments[0] as? String ?? ""
-        if (!url.isEmpty) {
-            do {
-                try plugin.previewDocumentFromUrl(url: URL(string: url)!)
-            } catch {
-                sendResult(result: "", error: error.localizedDescription)
-            }
+        do {
+            try plugin.previewDocumentFromUrl(url: URL(string: url)!)
+        } catch {
+            sendResult(result: "", error: error.localizedDescription)
         }
     }
     
     @objc(openDocumentFromLocalPath:)
     func openDocumentFromLocalPath(command: CDVInvokedUrlCommand) {
         let filePath = command.arguments[0] as? String ?? ""
-        if (!filePath.isEmpty) {
-            let url = URL(fileURLWithPath: filePath)
-            do {
-                try plugin.openDocumentFromUrl(url: url)
-            } catch {
-                sendResult(result: "", error: error.localizedDescription)
-            }
+        let url = URL(fileURLWithPath: filePath)
+        do {
+            try plugin.openDocumentFromUrl(url: url)
+        } catch {
+            sendResult(result: "", error: error.localizedDescription)
         }
     }
     
     @objc(openDocumentFromUrl:)
     func openDocumentFromUrl(command: CDVInvokedUrlCommand) {
         let url = command.arguments[0] as? String ?? ""
-        if (!url.isEmpty) {
-            do {
-                try plugin.openDocumentFromUrl(url: URL(string: url)!)
-            } catch {
-                sendResult(result: "", error: error.localizedDescription)
-            }
+        do {
+            try plugin.openDocumentFromUrl(url: URL(string: url)!)
+        } catch {
+            sendResult(result: "", error: error.localizedDescription)
         }
     }
     
     @objc(previewMediaContent:)
     func previewMediaContent(command: CDVInvokedUrlCommand) {
         let url = command.arguments[0] as? String ?? ""
-        if (!url.isEmpty) {
-            do {
-                try plugin.previewMediaContent(url: URL(fileURLWithPath: url))
-            } catch {
-                sendResult(result: "", error: error.localizedDescription)
-            }
+        do {
+            try plugin.previewMediaContent(url: URL(fileURLWithPath: url))
+        } catch {
+            sendResult(result: "", error: error.localizedDescription)
         }
     }
 
@@ -92,4 +83,5 @@ class CDVFileViewer : CDVPlugin {
         
         viewController.dismiss(animated: true, completion: nil)
     }
+    
 }

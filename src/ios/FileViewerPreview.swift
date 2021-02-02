@@ -39,9 +39,9 @@ class FileViewerPreview {
         
         self.url = url
         FileDownloader.downloadfile(url: url, completion: {(success, fileLocationURL) in
-            if success {
+            if success, let filePath = fileLocationURL?.standardized as NSURL? {
                 DispatchQueue.main.async {
-                    self.previewItem = fileLocationURL!.standardized as NSURL
+                    self.previewItem = filePath
                     let previewController = QLPreviewController()
                     previewController.dataSource = self
                     self.viewController?.present(previewController, animated: true, completion: nil)

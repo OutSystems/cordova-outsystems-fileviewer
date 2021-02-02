@@ -18,7 +18,7 @@ class FileViewerPlugin {
         self.rootViewController = viewController
     }
     
-    func openDocumentFromUrl(url:URL) throws {
+    func openDocumentFromUrl(url:URL) throws {        
         let fileViewerViewController = FileViewerViewController()
         
         UIApplication.shared.isIdleTimerDisabled = true
@@ -42,12 +42,18 @@ class FileViewerPlugin {
         try fileViewerPreview.openDocumentFromUrl(url: url)
     }
     
-    func previewDocumentFromLocaPath(url:URL) throws {
+    func previewDocumentFromLocalPath(url:URL) throws {
+        guard url.path.isEmpty else { throw FileViewerErrors.invalidEmptyURL }
+        guard FileManager.default.fileExists(atPath: url.path) else { throw FileViewerErrors.fileDoesNotExist }
+        
         let fileViewerPreview = FileViewerPreview(viewController: rootViewController)
         try fileViewerPreview.openDocumentFromLocalPath(url: url)
     }
     
     func previewMediaContent(url:URL) throws {
+        
+        guard url.path.isEmpty else { throw FileViewerErrors.invalidEmptyURL }
+        
         let fileViewerPreview = FileViewerPreview(viewController: rootViewController)
         try fileViewerPreview.previewMediaContent(url: url)
     }
