@@ -61,7 +61,7 @@ public class OSFileViewer extends CordovaPlugin {
             return true;
         }
         else if (action.equals(KEY_ACTION_PREVIEW_MEDIA_CONTENT)) {
-            this.previewMediaContent(args, callbackContext);
+            this.openDocumentFromLocalPath(args, callbackContext);
             return true;
         }
         else if (action.equals(KEY_ACTION_OPEN_FILE_CHOOSER)) {
