@@ -96,27 +96,16 @@ public class OSFileViewer extends CordovaPlugin {
             return;
         }
 
-        if (isPathValid(filePath)) {
-
-            if(mimeType.equals("")){
-                mimeType = getMimeType(filePath);
-            }
-
-            File file = new File(filePath.replace("file:///", ""));
-            Uri contentUri = FileProvider.getUriForFile(this.cordova.getActivity().getApplicationContext(), this.cordova.getActivity().getPackageName() + ".opener.provider", file);
-
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(contentUri, mimeType);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        if (OSOpenDocument.getInstance().isPathValid(filePath)) {
 
             try {
-                this.cordova.getActivity().startActivity(intent);
+                OSOpenDocument.getInstance().openDocumentFromLocalPath(this.cordova.getActivity(), filePath, mimeType);
                 callbackContext.success();
             } catch (ActivityNotFoundException e) {
                 callbackContext.error(buildErrorResponse(5, "There is no app to open this document"));
             }
             return;
+
         }
 
         callbackContext.error(buildErrorResponse(2, "Path of the file to open is invalid"));
@@ -136,11 +125,10 @@ public class OSFileViewer extends CordovaPlugin {
             return;
         }
 
-        if (isPathValid(url)) {
+        if (OSOpenDocument.getInstance().isPathValid(url)) {
 
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            try {
-                this.cordova.getActivity().startActivity(intent);
+            try{
+                OSOpenDocument.getInstance().openDocumentFromURL(this.cordova.getActivity(), url);
                 callbackContext.success();
             } catch (ActivityNotFoundException e) {
                 callbackContext.error(buildErrorResponse(5, "There is no app to open this document"));
@@ -161,25 +149,12 @@ public class OSFileViewer extends CordovaPlugin {
      * @param callbackContext
      */
     private void openFileChooser(JSONArray args, CallbackContext callbackContext) {
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.setType("*/*");
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        try {
-            this.cordova.getActivity().startActivityForResult(
-                    Intent.createChooser(intent, "Select a file to open"),
-                    0);
-        } catch (ActivityNotFoundException ex) {
+        try{
+            OSOpenFileChooser.getInstance().openFileChooser(this.cordova.getActivity());
+            callbackContext.success();
+        } catch (ActivityNotFoundException e) {
             callbackContext.error(buildErrorResponse(6, "There is no app to browse files with"));
         }
-    }
-
-    /**
-     * boolean method to check if a given file path or url is valid
-     * @param path - the file path or url to check
-     * @return true if path is valid, false otherwise
-     */
-    private boolean isPathValid(String path){
-        return (path != null && path.length() > 0);
     }
 
     private JSONObject buildErrorResponse(int errorCode, String errorMessage) {
@@ -191,15 +166,6 @@ public class OSFileViewer extends CordovaPlugin {
             Log.e("FileViewer", e.toString());
         }
         return jsonObject;
-    }
-
-    public static String getMimeType(String url) {
-        String type = null;
-        String extension = MimeTypeMap.getFileExtensionFromUrl(url);
-        if (extension != null) {
-            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
-        }
-        return type;
     }
 
 }
