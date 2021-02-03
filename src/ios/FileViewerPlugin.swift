@@ -11,35 +11,40 @@ import PDFKit
 class FileViewerPlugin {
    
     var fileViewerPreview: FileViewerPreview?
-    var fileViewerViewController: FileViewerViewController?
+    var fileViewerOpenDocument: FileViewerOpenDocument?
     let rootViewController:UIViewController
     
     init(viewController:UIViewController) {
         self.rootViewController = viewController
     }
     
-    func openDocumentFromUrl(url:URL) throws {        
-        let fileViewerViewController = FileViewerViewController()
-        
-        UIApplication.shared.isIdleTimerDisabled = true
-        
-        let navigationController = UINavigationController(rootViewController: fileViewerViewController)
-        navigationController.modalPresentationStyle = .fullScreen
-        
-        let rightBtn = UIButton(type: .system)
-        rightBtn.setTitle("Close", for: .normal)
-        rightBtn.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
-        
-        let rightButton = UIBarButtonItem(customView: rightBtn)
-        fileViewerViewController.navigationItem.rightBarButtonItem = rightButton
-        try fileViewerViewController.openDocumentFromUrl(url: url)
-        rootViewController.present(navigationController, animated: true)
-        
+    func openDocumentFromLocalPath(url:URL) throws {
+        guard url.path.isEmpty else { throw FileViewerErrors.invalidEmptyURL }
+        guard FileManager.default.fileExists(atPath: url.path) else { throw FileViewerErrors.fileDoesNotExist }
+        let fileViewerOpenDocument = FileViewerOpenDocument(viewController: rootViewController)
+        try fileViewerOpenDocument.openDocumentFromLocalPath(url: url)
     }
     
-    func previewDocumentFromUrl(url:URL) throws {
-        let fileViewerPreview = FileViewerPreview(viewController: rootViewController)
-        try fileViewerPreview.openDocumentFromUrl(url: url)
+    func openDocumentFromUrl(url:String) throws {
+        guard url.isValidUrl() else { throw FileViewerErrors.invalidURL }
+        
+        if let fileUrl = URL(string: url) {
+            let fileViewerOpenDocument = FileViewerOpenDocument(viewController: rootViewController)
+            try fileViewerOpenDocument.openDocumentFromUrl(url: fileUrl)
+        } else {
+            throw FileViewerErrors.couldNotOpenDocument
+        }
+    }
+    
+    func previewDocumentFromUrl(url:String) throws {
+        guard url.isValidUrl() else { throw FileViewerErrors.invalidURL}
+        
+        if let fileUrl = URL(string: url) {
+            let fileViewerPreview = FileViewerPreview(viewController: rootViewController)
+            try fileViewerPreview.previewDocumentFromUrl(url: fileUrl)
+        } else {
+            throw FileViewerErrors.couldNotOpenDocument
+        }
     }
     
     func previewDocumentFromLocalPath(url:URL) throws {
@@ -47,19 +52,12 @@ class FileViewerPlugin {
         guard FileManager.default.fileExists(atPath: url.path) else { throw FileViewerErrors.fileDoesNotExist }
         
         let fileViewerPreview = FileViewerPreview(viewController: rootViewController)
-        try fileViewerPreview.openDocumentFromLocalPath(url: url)
+        try fileViewerPreview.previewDocumentFromLocalPath(url: url)
     }
     
     func previewMediaContent(url:URL) throws {
-        
-        guard url.path.isEmpty else { throw FileViewerErrors.invalidEmptyURL }
-        
         let fileViewerPreview = FileViewerPreview(viewController: rootViewController)
         try fileViewerPreview.previewMediaContent(url: url)
-    }
-    
-    @objc func closeTapped() {
-        rootViewController.dismiss(animated: false, completion: nil)
     }
     
 }

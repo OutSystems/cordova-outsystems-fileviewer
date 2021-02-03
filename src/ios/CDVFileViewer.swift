@@ -16,7 +16,6 @@ class CDVFileViewer : CDVPlugin {
 
     @objc(previewDocumentFromLocalPath:)
     func previewDocumentFromLocalPath(command: CDVInvokedUrlCommand) {
-        
         let filePath = command.arguments[0] as? String ?? ""
         do {
             let url = URL(fileURLWithPath: filePath)
@@ -31,7 +30,7 @@ class CDVFileViewer : CDVPlugin {
     func previewDocumentFromUrl(command: CDVInvokedUrlCommand) {
         let url = command.arguments[0] as? String ?? ""
         do {
-            try plugin.previewDocumentFromUrl(url: URL(string: url)!)
+            try plugin.previewDocumentFromUrl(url: url)
         } catch {
             sendResult(result: "", error: error.localizedDescription)
         }
@@ -40,9 +39,8 @@ class CDVFileViewer : CDVPlugin {
     @objc(openDocumentFromLocalPath:)
     func openDocumentFromLocalPath(command: CDVInvokedUrlCommand) {
         let filePath = command.arguments[0] as? String ?? ""
-        let url = URL(fileURLWithPath: filePath)
         do {
-            try plugin.openDocumentFromUrl(url: url)
+            try plugin.openDocumentFromLocalPath(url: URL(fileURLWithPath: filePath))
         } catch {
             sendResult(result: "", error: error.localizedDescription)
         }
@@ -52,7 +50,7 @@ class CDVFileViewer : CDVPlugin {
     func openDocumentFromUrl(command: CDVInvokedUrlCommand) {
         let url = command.arguments[0] as? String ?? ""
         do {
-            try plugin.openDocumentFromUrl(url: URL(string: url)!)
+            try plugin.openDocumentFromUrl(url: url)
         } catch {
             sendResult(result: "", error: error.localizedDescription)
         }

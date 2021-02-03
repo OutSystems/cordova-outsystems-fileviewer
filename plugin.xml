@@ -28,7 +28,8 @@
     <source-file src="src/ios/FileViewerErrors.swift"/>
     <source-file src="src/ios/FileViewerPlugin.swift"/>
     <source-file src="src/ios/FileViewerPreview.swift"/>
-    <source-file src="src/ios/FileViewerViewController.swift"/>
+    <source-file src="src/ios/FileViewerOpenDocument.swift"/>
+    <source-file src="src/ios/String+Extension.swift"/>
 
   </platform>
 </plugin>

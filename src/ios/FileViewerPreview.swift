@@ -12,16 +12,15 @@ import AVKit
 class FileViewerPreview {
     
     lazy var previewItem = NSURL()
-    var url: URL?
     weak var viewController: UIViewController?
     
     init(viewController: UIViewController) {
         self.viewController = viewController
     }
     
-    func openDocumentFromLocalPath(url:URL) throws {
+    func previewDocumentFromLocalPath(url:URL) throws {
         if url.absoluteString.isEmpty {
-            throw FileViewerErrors.couldNotOpenDocument
+            throw FileViewerErrors.invalidEmptyURL
         }
         DispatchQueue.main.async {
             let previewController = QLPreviewController()
@@ -29,19 +28,17 @@ class FileViewerPreview {
             previewController.dataSource = self
             self.viewController?.present(previewController, animated: true, completion: nil)
         }
-
     }
     
-    func openDocumentFromUrl(url:URL) throws {
+    func previewDocumentFromUrl(url:URL) throws {
         if url.absoluteString.isEmpty {
-            throw FileViewerErrors.couldNotOpenDocument
+            throw FileViewerErrors.invalidEmptyURL
         }
         
-        self.url = url
         FileDownloader.downloadfile(url: url, completion: {(success, fileLocationURL) in
-            if success, let filePath = fileLocationURL?.standardized as NSURL? {
+            if success, let filePath = fileLocationURL {
                 DispatchQueue.main.async {
-                    self.previewItem = filePath
+                    self.previewItem = filePath.standardized as NSURL
                     let previewController = QLPreviewController()
                     previewController.dataSource = self
                     self.viewController?.present(previewController, animated: true, completion: nil)
@@ -53,7 +50,7 @@ class FileViewerPreview {
     
     func previewMediaContent(url:URL) throws {
         if url.absoluteString.isEmpty {
-            throw FileViewerErrors.couldNotOpenDocument
+            throw FileViewerErrors.invalidEmptyURL
         }
         
         let player = AVPlayer(url: url.standardized)

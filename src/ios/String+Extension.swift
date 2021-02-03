@@ -9,9 +9,10 @@ import Foundation
 
 extension String {
     
-    func validateUrl (urlString: NSString) -> Bool {
-        let urlRegEx = "((?:http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?"
-        return NSPredicate(format: "SELF MATCHES %@", urlRegEx).evaluate(with: urlString)
+    func isValidUrl() -> Bool {
+        let regex = "((http|https|ftp)://)?((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+"
+        let predicate = NSPredicate(format: "SELF MATCHES %@", regex)
+        return predicate.evaluate(with: self)
     }
     
 }
