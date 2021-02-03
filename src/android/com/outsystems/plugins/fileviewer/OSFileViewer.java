@@ -97,7 +97,6 @@ public class OSFileViewer extends CordovaPlugin {
         }
 
         if (OSOpenDocument.getInstance().isPathValid(filePath)) {
-
             try {
                 OSOpenDocument.getInstance().openDocumentFromLocalPath(this.cordova.getActivity(), filePath, mimeType);
                 callbackContext.success();
@@ -105,7 +104,6 @@ public class OSFileViewer extends CordovaPlugin {
                 callbackContext.error(buildErrorResponse(5, "There is no app to open this document"));
             }
             return;
-
         }
 
         callbackContext.error(buildErrorResponse(2, "Path of the file to open is invalid"));
@@ -126,7 +124,6 @@ public class OSFileViewer extends CordovaPlugin {
         }
 
         if (OSOpenDocument.getInstance().isPathValid(url)) {
-
             try{
                 OSOpenDocument.getInstance().openDocumentFromURL(this.cordova.getActivity(), url);
                 callbackContext.success();

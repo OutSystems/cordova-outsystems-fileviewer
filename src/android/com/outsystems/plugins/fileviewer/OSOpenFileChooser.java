@@ -7,7 +7,6 @@ import android.content.Intent;
 public class OSOpenFileChooser {
 
     public void openFileChooser(Activity activity) throws ActivityNotFoundException {
-
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.setType("*/*");
         intent.addCategory(Intent.CATEGORY_OPENABLE);

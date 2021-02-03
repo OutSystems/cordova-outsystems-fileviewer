@@ -13,28 +13,24 @@ import java.io.File;
 public class OSOpenDocument {
 
     public void openDocumentFromLocalPath(Activity activity, String filePath, String mimeType) throws ActivityNotFoundException{
+        if(mimeType.equals("")){
+            mimeType = getMimeType(filePath);
+        }
 
-            if(mimeType.equals("")){
-                mimeType = getMimeType(filePath);
-            }
+        File file = new File(filePath.replace("file:///", ""));
+        Uri contentUri = FileProvider.getUriForFile(activity.getApplicationContext(), activity.getPackageName() + ".opener.provider", file);
 
-            File file = new File(filePath.replace("file:///", ""));
-            Uri contentUri = FileProvider.getUriForFile(activity.getApplicationContext(), activity.getPackageName() + ".opener.provider", file);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(contentUri, mimeType);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(contentUri, mimeType);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
-            activity.startActivity(intent);
-
+        activity.startActivity(intent);
     }
 
     public void openDocumentFromURL(Activity activity, String url) throws ActivityNotFoundException{
-
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         activity.startActivity(intent);
-
     }
 
     public static String getMimeType(String url) {
