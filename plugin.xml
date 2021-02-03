@@ -25,6 +25,9 @@
     </config-file>
     <config-file parent="/*" target="AndroidManifest.xml"/>
     <source-file src="src/android/com/outsystems/plugins/fileviewer/OSFileViewer.java" target-dir="src/com/outsystems/plugins/fileviewer"/>
+    <source-file src="src/android/com/outsystems/plugins/fileviewer/OSOpenDocument.java" target-dir="src/com/outsystems/plugins/fileviewer"/>
+    <source-file src="src/android/com/outsystems/plugins/fileviewer/OSOpenFileChooser.java" target-dir="src/com/outsystems/plugins/fileviewer"/>
+    <source-file src="src/android/com/outsystems/plugins/fileviewer/OSPreviewDocument.java" target-dir="src/com/outsystems/plugins/fileviewer"/>
     <source-file src="src/android/xml/file_viewer_paths.xml" target-dir="res/xml"/>
   </platform>
   <platform name="ios">
