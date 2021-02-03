@@ -1,0 +1,120 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml:1:1-12:12
+INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml:1:1-12:12
+INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml:1:1-12:12
+INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml:1:1-12:12
+MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/9e241ade4feea143d6efde1061ddefb1/appcompat-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [:CordovaLib] /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/node_modules/cordova-android/framework/build/intermediates/library_manifest/debug/AndroidManifest.xml:20:1-27:12
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/5bbf8db580799ffcb796ec2568db7ac3/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/87d0c49b85e22ccd837439a2ada3629c/appcompat-resources-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/355ad34104d74667ec850f5d863bf6a4/drawerlayout-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/2fcf65548dad3afab49272d052f192e9/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/82b4cef4dab83589862c873cf230c3d8/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/52820f3d5dc9e886ce4f98bb00309a58/activity-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/f963f74c06814642512a0f6cc619237f/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/7a4b3813c751c56b36814991e84748b7/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/d8fd54d31e223ccf66279b49cbe0b6c1/customview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/8ac23c26c7dcc5d486fed317d2b53c3d/core-1.1.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/b1cd2ffcf4dff9ba243c3dadcab815fd/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/de74f26688ad356f07afe08f5f2e2f25/versionedparcelable-1.1.0/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/28a83dfaa48931819085f8fa49017b10/lifecycle-runtime-2.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/d34a31ee2e39ae0227ee1a2f80be0a61/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/1237bf9e35cab3ca49a2ee83a8755c28/savedstate-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/2ae42694ed8b1eb5e6487cc4ca63f786/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/51db53666298bf4dbe1433694f2c598d/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/41dc4f638f16ab60e2886c2f1ffbfc9c/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/d3a3b44c0da0afaf7661ba3fb3a1f4de/core-runtime-2.0.0/AndroidManifest.xml:17:1-22:12
+INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml:1:1-12:12
+INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml:1:1-12:12
+INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml:1:1-12:12
+	package
+		ADDED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml:2:5-47
+		INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml
+		ADDED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml:1:1-12:12
+		INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml
+		ADDED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml:1:1-12:12
+		INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml:1:11-69
+application
+ADDED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml:4:5-10:43
+MERGED from [androidx.core:core:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/8ac23c26c7dcc5d486fed317d2b53c3d/core-1.1.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/8ac23c26c7dcc5d486fed317d2b53c3d/core-1.1.0/AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/de74f26688ad356f07afe08f5f2e2f25/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/de74f26688ad356f07afe08f5f2e2f25/versionedparcelable-1.1.0/AndroidManifest.xml:24:5-25:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/8ac23c26c7dcc5d486fed317d2b53c3d/core-1.1.0/AndroidManifest.xml:24:18-86
+	android:supportsRtl
+		ADDED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml:9:9-35
+	android:label
+		ADDED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml:7:9-41
+	android:roundIcon
+		ADDED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml:8:9-54
+	android:icon
+		ADDED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml:6:9-43
+	android:allowBackup
+		ADDED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml:5:9-35
+	android:theme
+		ADDED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml:10:9-40
+uses-sdk
+INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml
+INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml
+MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/9e241ade4feea143d6efde1061ddefb1/appcompat-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/9e241ade4feea143d6efde1061ddefb1/appcompat-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [:CordovaLib] /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/node_modules/cordova-android/framework/build/intermediates/library_manifest/debug/AndroidManifest.xml:25:5-44
+MERGED from [:CordovaLib] /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/node_modules/cordova-android/framework/build/intermediates/library_manifest/debug/AndroidManifest.xml:25:5-44
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/5bbf8db580799ffcb796ec2568db7ac3/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/5bbf8db580799ffcb796ec2568db7ac3/fragment-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/87d0c49b85e22ccd837439a2ada3629c/appcompat-resources-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/87d0c49b85e22ccd837439a2ada3629c/appcompat-resources-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/355ad34104d74667ec850f5d863bf6a4/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/355ad34104d74667ec850f5d863bf6a4/drawerlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/2fcf65548dad3afab49272d052f192e9/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/2fcf65548dad3afab49272d052f192e9/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/82b4cef4dab83589862c873cf230c3d8/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/82b4cef4dab83589862c873cf230c3d8/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/52820f3d5dc9e886ce4f98bb00309a58/activity-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/52820f3d5dc9e886ce4f98bb00309a58/activity-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/f963f74c06814642512a0f6cc619237f/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/f963f74c06814642512a0f6cc619237f/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/7a4b3813c751c56b36814991e84748b7/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/7a4b3813c751c56b36814991e84748b7/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/d8fd54d31e223ccf66279b49cbe0b6c1/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/d8fd54d31e223ccf66279b49cbe0b6c1/customview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/8ac23c26c7dcc5d486fed317d2b53c3d/core-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/8ac23c26c7dcc5d486fed317d2b53c3d/core-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/b1cd2ffcf4dff9ba243c3dadcab815fd/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/b1cd2ffcf4dff9ba243c3dadcab815fd/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/de74f26688ad356f07afe08f5f2e2f25/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/de74f26688ad356f07afe08f5f2e2f25/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/28a83dfaa48931819085f8fa49017b10/lifecycle-runtime-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/28a83dfaa48931819085f8fa49017b10/lifecycle-runtime-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/d34a31ee2e39ae0227ee1a2f80be0a61/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/d34a31ee2e39ae0227ee1a2f80be0a61/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/1237bf9e35cab3ca49a2ee83a8755c28/savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/1237bf9e35cab3ca49a2ee83a8755c28/savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/2ae42694ed8b1eb5e6487cc4ca63f786/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/2ae42694ed8b1eb5e6487cc4ca63f786/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/51db53666298bf4dbe1433694f2c598d/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/51db53666298bf4dbe1433694f2c598d/lifecycle-livedata-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/41dc4f638f16ab60e2886c2f1ffbfc9c/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/41dc4f638f16ab60e2886c2f1ffbfc9c/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/d3a3b44c0da0afaf7661ba3fb3a1f4de/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/cin/.gradle/caches/transforms-2/files-2.1/d3a3b44c0da0afaf7661ba3fb3a1f4de/core-runtime-2.0.0/AndroidManifest.xml:20:5-44
+INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml
+INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml
+		ADDED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml
+		ADDED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/src/main/AndroidManifest.xml

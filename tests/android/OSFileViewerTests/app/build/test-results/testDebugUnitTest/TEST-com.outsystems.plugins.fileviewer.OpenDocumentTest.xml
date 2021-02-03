@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.outsystems.plugins.fileviewer.OpenDocumentTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-02-03T18:33:33" hostname="os-60vy1z2.domain.outsystems.com" time="0.0">
+  <properties/>
+  <testcase name="helloWorldTest" classname="com.outsystems.plugins.fileviewer.OpenDocumentTest" time="0.0"/>
+  <testcase name="addition_isCorrect" classname="com.outsystems.plugins.fileviewer.OpenDocumentTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
