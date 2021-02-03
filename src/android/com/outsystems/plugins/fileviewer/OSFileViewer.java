@@ -14,6 +14,8 @@ import androidx.core.content.FileProvider;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
+import com.outsystems.plugins.fileviewer.OSOpenDocument;
+import com.outsystems.plugins.fileviewer.OSOpenFileChooser;
 
 import org.apache.cordova.LOG;
 import org.apache.cordova.PermissionHelper;
