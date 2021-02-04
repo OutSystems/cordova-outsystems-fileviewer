@@ -12,14 +12,21 @@ import static org.junit.Assert.*;
 public class OpenDocumentTest {
 
     @Test
-    public void isPathValid_FilePathSuccess(){
+    public void given_ValidFilePath_When_CheckingIsPathValid_Then_FilePathIsValid(){
 
         assertTrue(OSOpenDocument.getInstance().isPathValid("file:///storage/emulated/0/android/media/com.outsystems.rd.FileViewerTest/nomePDF.pdf"));
 
     }
 
     @Test
-    public void isPathValid_FilePathError(){
+    public void given_ValidURL_When_CheckingIsPathValid_Then_URLIsValid(){
+
+        assertTrue(OSOpenDocument.getInstance().isPathValid("https://www.tutorialspoint.com/swift/swift_tutorial.pdf"));
+
+    }
+
+    @Test
+    public void given_EmptyPath_When_CheckingIsPathValid_Then_PathIsNotValid(){
 
         assertFalse(OSOpenDocument.getInstance().isPathValid(""));
 
