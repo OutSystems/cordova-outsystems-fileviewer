@@ -9,10 +9,9 @@ import XCTest
 @testable import OSFileViewerTests
 
 class OSFileViewerOpenDocumentTests: XCTestCase {
-
+    
     func test_When_emptyUrlPassed_Expect_invalidEmptyURL() throws {
-        let viewController = UIViewController()
-        let fileViewerPlugin = FileViewerPlugin(viewController: viewController)
+        let fileViewerPlugin = FileViewerPlugin()
         let urlStr = ""
         
         do {
@@ -25,8 +24,7 @@ class OSFileViewerOpenDocumentTests: XCTestCase {
     }
     
     func test_When_invalidPathPassed_Expect_fileDoesNotExist() throws {
-        let viewController = UIViewController()
-        let fileViewerPlugin = FileViewerPlugin(viewController: viewController)
+        let fileViewerPlugin = FileViewerPlugin()
         let urlStr = "aaaaaaaaaaaaaa"
         
         do {
@@ -39,8 +37,7 @@ class OSFileViewerOpenDocumentTests: XCTestCase {
     }
     
     func test_When_emptyUrlPassed_Expect_invalidURL() throws {
-        let viewController = UIViewController()
-        let fileViewerPlugin = FileViewerPlugin(viewController: viewController)
+        let fileViewerPlugin = FileViewerPlugin()
         let urlStr = ""
         
         do {

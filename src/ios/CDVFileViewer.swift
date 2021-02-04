@@ -1,7 +1,5 @@
 
 import UIKit
-import PDFKit
-
 
 var callbackId:String=""
 
@@ -11,7 +9,8 @@ class CDVFileViewer : CDVPlugin {
     var plugin: FileViewerPlugin!
     
     override func pluginInitialize() {
-        plugin = FileViewerPlugin(viewController: viewController)
+        plugin = FileViewerPlugin()
+        plugin.rootViewController = viewController
     }
 
     @objc(previewDocumentFromLocalPath:)

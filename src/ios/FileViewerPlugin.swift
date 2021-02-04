@@ -6,17 +6,13 @@
 //
 
 import Foundation
-import PDFKit
+import UIKit
 
 class FileViewerPlugin {
    
     var fileViewerPreview: FileViewerPreview?
     var fileViewerOpenDocument: FileViewerOpenDocument?
-    let rootViewController:UIViewController
-    
-    init(viewController:UIViewController) {
-        self.rootViewController = viewController
-    }
+    var rootViewController:UIViewController?
     
     func openDocumentFromLocalPath(url:String) throws {
         guard !url.isEmpty else { throw FileViewerErrors.invalidEmptyURL }
@@ -24,8 +20,10 @@ class FileViewerPlugin {
         if let filePath = URL.init(string: url) {
             guard FileManager.default.fileExists(atPath: filePath.path) else { throw FileViewerErrors.fileDoesNotExist }
             
-            let fileViewerOpenDocument = FileViewerOpenDocument(viewController: rootViewController)
-            try fileViewerOpenDocument.openDocumentFromLocalPath(url: filePath)
+            if let viewController = rootViewController {
+                let fileViewerOpenDocument = FileViewerOpenDocument(viewController: viewController)
+                try fileViewerOpenDocument.openDocumentFromLocalPath(url: filePath)
+            }
         }
 
     }
@@ -33,8 +31,8 @@ class FileViewerPlugin {
     func openDocumentFromUrl(url:String) throws {
         guard url.isValidUrl() else { throw FileViewerErrors.invalidURL }
         
-        if let fileUrl = URL(string: url) {
-            let fileViewerOpenDocument = FileViewerOpenDocument(viewController: rootViewController)
+        if let fileUrl = URL(string: url), let viewController = rootViewController {
+            let fileViewerOpenDocument = FileViewerOpenDocument(viewController: viewController)
             try fileViewerOpenDocument.openDocumentFromUrl(url: fileUrl)
         } else {
             throw FileViewerErrors.couldNotOpenDocument
@@ -44,8 +42,8 @@ class FileViewerPlugin {
     func previewDocumentFromUrl(url:String) throws {
         guard url.isValidUrl() else { throw FileViewerErrors.invalidURL}
         
-        if let fileUrl = URL(string: url) {
-            let fileViewerPreview = FileViewerPreview(viewController: rootViewController)
+        if let fileUrl = URL(string: url), let viewController = rootViewController {
+            let fileViewerPreview = FileViewerPreview(viewController: viewController)
             try fileViewerPreview.previewDocumentFromUrl(url: fileUrl)
         } else {
             throw FileViewerErrors.couldNotOpenDocument
@@ -57,8 +55,11 @@ class FileViewerPlugin {
         
         if let filePath = URL.init(string: url) {
             guard FileManager.default.fileExists(atPath: filePath.path) else { throw FileViewerErrors.fileDoesNotExist }
-            let fileViewerPreview = FileViewerPreview(viewController: rootViewController)
-            try fileViewerPreview.previewDocumentFromLocalPath(url: filePath)
+
+            if let viewController = rootViewController {
+                let fileViewerPreview = FileViewerPreview(viewController: viewController)
+                try fileViewerPreview.previewDocumentFromLocalPath(url: filePath)
+            }
         }
 
     }
@@ -68,12 +69,15 @@ class FileViewerPlugin {
         
         if let filePath = URL.init(string: url) {
             guard FileManager.default.fileExists(atPath: filePath.path) else { throw FileViewerErrors.fileDoesNotExist }
-            let fileViewerPreview = FileViewerPreview(viewController: rootViewController)
-            try fileViewerPreview.previewMediaContent(url: filePath)
+            
+            if let viewController = rootViewController {
+                let fileViewerPreview = FileViewerPreview(viewController: viewController)
+                try fileViewerPreview.previewMediaContent(url: filePath)
+            }
         } else {
             throw FileViewerErrors.couldNotOpenDocument
         }
     }
-        
+    
 }
 

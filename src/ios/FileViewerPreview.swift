@@ -19,9 +19,6 @@ class FileViewerPreview {
     }
     
     func previewDocumentFromLocalPath(url:URL) throws {
-        if url.absoluteString.isEmpty {
-            throw FileViewerErrors.invalidEmptyURL
-        }
         DispatchQueue.main.async {
             let previewController = QLPreviewController()
             self.previewItem = url.standardized as NSURL
@@ -30,11 +27,7 @@ class FileViewerPreview {
         }
     }
     
-    func previewDocumentFromUrl(url:URL) throws {
-        if url.absoluteString.isEmpty {
-            throw FileViewerErrors.invalidEmptyURL
-        }
-        
+    func previewDocumentFromUrl(url:URL) throws {        
         FileDownloader.downloadfile(url: url, completion: {(success, fileLocationURL) in
             if success, let filePath = fileLocationURL {
                 DispatchQueue.main.async {
@@ -49,10 +42,6 @@ class FileViewerPreview {
     }
     
     func previewMediaContent(url:URL) throws {
-        if url.absoluteString.isEmpty {
-            throw FileViewerErrors.invalidEmptyURL
-        }
-        
         let player = AVPlayer(url: url.standardized)
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
