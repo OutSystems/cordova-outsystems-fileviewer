@@ -5,7 +5,7 @@
 //  Created by Carlos Correa on 02/02/2021.
 //
 
-import Foundation
+import UIKit
 
 class FileViewerOpenDocument: NSObject {
     

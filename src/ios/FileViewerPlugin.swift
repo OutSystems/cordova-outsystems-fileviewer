@@ -18,11 +18,16 @@ class FileViewerPlugin {
         self.rootViewController = viewController
     }
     
-    func openDocumentFromLocalPath(url:URL) throws {
-        guard url.path.isEmpty else { throw FileViewerErrors.invalidEmptyURL }
-        guard FileManager.default.fileExists(atPath: url.path) else { throw FileViewerErrors.fileDoesNotExist }
-        let fileViewerOpenDocument = FileViewerOpenDocument(viewController: rootViewController)
-        try fileViewerOpenDocument.openDocumentFromLocalPath(url: url)
+    func openDocumentFromLocalPath(url:String) throws {
+        guard !url.isEmpty else { throw FileViewerErrors.invalidEmptyURL }
+        
+        if let filePath = URL.init(string: url) {
+            guard FileManager.default.fileExists(atPath: filePath.path) else { throw FileViewerErrors.fileDoesNotExist }
+            
+            let fileViewerOpenDocument = FileViewerOpenDocument(viewController: rootViewController)
+            try fileViewerOpenDocument.openDocumentFromLocalPath(url: filePath)
+        }
+
     }
     
     func openDocumentFromUrl(url:String) throws {
@@ -47,18 +52,28 @@ class FileViewerPlugin {
         }
     }
     
-    func previewDocumentFromLocalPath(url:URL) throws {
-        guard url.path.isEmpty else { throw FileViewerErrors.invalidEmptyURL }
-        guard FileManager.default.fileExists(atPath: url.path) else { throw FileViewerErrors.fileDoesNotExist }
+    func previewDocumentFromLocalPath(url:String) throws {
+        guard !url.isEmpty else { throw FileViewerErrors.invalidEmptyURL }
         
-        let fileViewerPreview = FileViewerPreview(viewController: rootViewController)
-        try fileViewerPreview.previewDocumentFromLocalPath(url: url)
+        if let filePath = URL.init(string: url) {
+            guard FileManager.default.fileExists(atPath: filePath.path) else { throw FileViewerErrors.fileDoesNotExist }
+            let fileViewerPreview = FileViewerPreview(viewController: rootViewController)
+            try fileViewerPreview.previewDocumentFromLocalPath(url: filePath)
+        }
+
     }
     
-    func previewMediaContent(url:URL) throws {
-        let fileViewerPreview = FileViewerPreview(viewController: rootViewController)
-        try fileViewerPreview.previewMediaContent(url: url)
+    func previewMediaContent(url:String) throws {
+        guard !url.isEmpty else { throw FileViewerErrors.invalidEmptyURL }
+        
+        if let filePath = URL.init(string: url) {
+            guard FileManager.default.fileExists(atPath: filePath.path) else { throw FileViewerErrors.fileDoesNotExist }
+            let fileViewerPreview = FileViewerPreview(viewController: rootViewController)
+            try fileViewerPreview.previewMediaContent(url: filePath)
+        } else {
+            throw FileViewerErrors.couldNotOpenDocument
+        }
     }
-    
+        
 }
 

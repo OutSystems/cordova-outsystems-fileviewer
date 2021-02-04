@@ -10,11 +10,11 @@ import Foundation
 class FileDownloader {
     static func downloadfile(url: URL ,completion: @escaping (_ success: Bool,_ fileLocation: URL?) -> Void){
         let itemUrl = url
-        let documentsDirectoryURL =  FileManager.default.temporaryDirectory
+        let documentsDirectoryURL = FileManager.default.temporaryDirectory
         let fileExtension = url.pathExtension
         let fileName = url.deletingPathExtension().lastPathComponent
         let destinationUrl = documentsDirectoryURL
-            .appendingPathComponent(fileName + UUID().uuidString)
+            .appendingPathComponent(fileName)
             .appendingPathExtension(fileExtension)
     
         if FileManager.default.fileExists(atPath: destinationUrl.path) {
