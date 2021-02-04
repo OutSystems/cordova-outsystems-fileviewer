@@ -12,8 +12,8 @@ exports.openDocumentFromLocalPath = function (filePath, fileMIMEType, success, e
     exec(success, error, 'CDVFileViewer', 'openDocumentFromLocalPath', [filePath, fileMIMEType]);
 };
 
-exports.openDocumentFromUrl = function (url, fileMIMEType, success, error) {
-    exec(success, error, 'CDVFileViewer', 'openDocumentFromUrl', [url, fileMIMEType]);
+exports.openDocumentFromUrl = function (url, success, error) {
+    exec(success, error, 'OSFileViewer', 'openDocumentFromUrl', [url]);
 };
 
 exports.previewMediaContent = function (url, fileMIMEType, success, error) {
