@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class OSFileViewer extends CordovaPlugin {
@@ -102,6 +103,8 @@ public class OSFileViewer extends CordovaPlugin {
                 callbackContext.success();
             } catch (ActivityNotFoundException e) {
                 callbackContext.error(buildErrorResponse(5, "There is no app to open this document"));
+            } catch (FileNotFoundException e) {
+                callbackContext.error(buildErrorResponse(6, "The file you are trying to open does not exist"));
             }
             return;
         }

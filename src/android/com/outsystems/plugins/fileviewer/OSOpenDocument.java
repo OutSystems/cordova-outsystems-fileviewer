@@ -9,23 +9,30 @@ import android.webkit.MimeTypeMap;
 import androidx.core.content.FileProvider;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class OSOpenDocument {
 
-    public void openDocumentFromLocalPath(Activity activity, String filePath, String mimeType) throws ActivityNotFoundException{
+    public void openDocumentFromLocalPath(Activity activity, String filePath, String mimeType) throws ActivityNotFoundException, FileNotFoundException {
         if(mimeType.equals("")){
             mimeType = getMimeType(filePath);
         }
 
         File file = new File(filePath.replace("file:///", ""));
-        Uri contentUri = FileProvider.getUriForFile(activity.getApplicationContext(), activity.getPackageName() + ".opener.provider", file);
 
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(contentUri, mimeType);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        if(file.exists()){
+            Uri contentUri = FileProvider.getUriForFile(activity.getApplicationContext(), activity.getPackageName() + ".opener.provider", file);
 
-        activity.startActivity(intent);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(contentUri, mimeType);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            activity.startActivity(intent);
+        }
+        else{
+            throw new FileNotFoundException();
+        }
     }
 
     public void openDocumentFromURL(Activity activity, String url) throws ActivityNotFoundException{
