@@ -25,4 +25,6 @@ public class OpenDocumentTest {
 
     }
 
+    //add test with invalid filePath, i.e., a path that does not exist (e.g. "aaaaaa")
+
 }
