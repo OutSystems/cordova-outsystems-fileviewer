@@ -32,7 +32,12 @@ public class OpenDocumentFromURLTest {
     }
 
     @Test
-    public void given_MalformedURL_When_CheckingIsURLValid_Then_URLIsNotValid(){
+    public void given_MalformedURL_When_CheckingIsURLValid_Then_URLIsValid(){
+        assertFalse(OSOpenDocument.getInstance().isURLValid("https//www.tutorialspoint.com/swift/swift_tutorial.pdf"));
+    }
+
+    @Test
+    public void given_MalformedURLSimpleString_When_CheckingIsURLValid_Then_URLIsNotValid(){
         assertFalse(OSOpenDocument.getInstance().isURLValid("aaaaa"));
     }
 
