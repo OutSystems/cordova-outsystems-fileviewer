@@ -35,6 +35,7 @@ public class OpenDocumentFromLocalPathTest {
         assertEquals("application/pdf", mimeTypeMock.determineMimeType("file:///storage/emulated/0/android/media/com.outsystems.rd.FileViewerTest/nomePDF.pdf"));
     }
 
+    //Work in Progress - this is just an idea, to use mocks.
     @Test
     public void given_pdfMimeType_When_GettingMimeTypeForPathWithoutPDFExtension_Then_PDFMimeTypeNotReturned() {
         GetMimeTypeMock mimeTypeMock = new GetMimeTypeMock();
