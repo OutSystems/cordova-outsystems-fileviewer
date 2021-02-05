@@ -16,6 +16,7 @@
 		D4379B8F25CC054F005EB1FE /* OSFileViewerOpenDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4379B8E25CC054F005EB1FE /* OSFileViewerOpenDocumentTests.swift */; };
 		D4379B9525CC0598005EB1FE /* OSFileViewerPreviewDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4379B9425CC0598005EB1FE /* OSFileViewerPreviewDocumentTests.swift */; };
 		D4379BA325CC390C005EB1FE /* OSFileViewerPreviewMediaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4379BA225CC390C005EB1FE /* OSFileViewerPreviewMediaTests.swift */; };
+		D4C9FF6E25CD9A4500330CB3 /* OSFileViewerUrlValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C9FF6D25CD9A4500330CB3 /* OSFileViewerUrlValidation.swift */; };
 		DA3EB3CC25CB145C00F6B20F /* OSFileViewerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA3EB3C225CB145C00F6B20F /* OSFileViewerTests.framework */; };
 		DA3EB3D325CB145C00F6B20F /* OSFileViewerTests.h in Headers */ = {isa = PBXBuildFile; fileRef = DA3EB3C525CB145C00F6B20F /* OSFileViewerTests.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		D4379B8E25CC054F005EB1FE /* OSFileViewerOpenDocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSFileViewerOpenDocumentTests.swift; sourceTree = "<group>"; };
 		D4379B9425CC0598005EB1FE /* OSFileViewerPreviewDocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSFileViewerPreviewDocumentTests.swift; sourceTree = "<group>"; };
 		D4379BA225CC390C005EB1FE /* OSFileViewerPreviewMediaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSFileViewerPreviewMediaTests.swift; sourceTree = "<group>"; };
+		D4C9FF6D25CD9A4500330CB3 /* OSFileViewerUrlValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSFileViewerUrlValidation.swift; sourceTree = "<group>"; };
 		DA3EB3C225CB145C00F6B20F /* OSFileViewerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OSFileViewerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA3EB3C525CB145C00F6B20F /* OSFileViewerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OSFileViewerTests.h; sourceTree = "<group>"; };
 		DA3EB3C625CB145C00F6B20F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				D4379B8E25CC054F005EB1FE /* OSFileViewerOpenDocumentTests.swift */,
 				D4379B9425CC0598005EB1FE /* OSFileViewerPreviewDocumentTests.swift */,
 				D4379BA225CC390C005EB1FE /* OSFileViewerPreviewMediaTests.swift */,
+				D4C9FF6D25CD9A4500330CB3 /* OSFileViewerUrlValidation.swift */,
 			);
 			path = OSFileViewerTestsTests;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4C9FF6E25CD9A4500330CB3 /* OSFileViewerUrlValidation.swift in Sources */,
 				D4379B8F25CC054F005EB1FE /* OSFileViewerOpenDocumentTests.swift in Sources */,
 				D4379BA325CC390C005EB1FE /* OSFileViewerPreviewMediaTests.swift in Sources */,
 				D4379B9525CC0598005EB1FE /* OSFileViewerPreviewDocumentTests.swift in Sources */,
