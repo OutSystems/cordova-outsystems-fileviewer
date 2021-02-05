@@ -1,4 +1,6 @@
 com/outsystems/plugins/fileviewer/ExampleUnitTest.java
  OSFileViewer.ExampleUnitTest
-com/outsystems/plugins/fileviewer/OpenDocumentTest.java
- com.outsystems.plugins.fileviewer.OpenDocumentTest
+com/outsystems/plugins/fileviewer/OpenDocumentFromURLTest.java
+ com.outsystems.plugins.fileviewer.OpenDocumentFromURLTest
+com/outsystems/plugins/fileviewer/OpenDocumentFromLocalPathTest.java
+ com.outsystems.plugins.fileviewer.OpenDocumentFromLocalPathTest

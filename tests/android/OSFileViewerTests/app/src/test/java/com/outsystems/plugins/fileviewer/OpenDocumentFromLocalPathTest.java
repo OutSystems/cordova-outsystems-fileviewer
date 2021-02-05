@@ -2,14 +2,15 @@ package com.outsystems.plugins.fileviewer;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
- * Example local unit test, which will execute on the development machine (host).
+ * Unit tests for the OpenDocumentFromURL functionality.
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class OpenDocumentTest {
+public class OpenDocumentFromLocalPathTest {
 
     @Test
     public void given_ValidFilePath_When_CheckingIsPathValid_Then_FilePathIsValid(){
@@ -19,19 +20,10 @@ public class OpenDocumentTest {
     }
 
     @Test
-    public void given_ValidURL_When_CheckingIsPathValid_Then_URLIsValid(){
-
-        assertTrue(OSOpenDocument.getInstance().isPathValid("https://www.tutorialspoint.com/swift/swift_tutorial.pdf"));
-
-    }
-
-    @Test
     public void given_EmptyPath_When_CheckingIsPathValid_Then_PathIsNotValid(){
 
         assertFalse(OSOpenDocument.getInstance().isPathValid(""));
 
     }
-
-    //add test with invalid filePath, i.e., a path that does not exist (e.g. "aaaaaa")
 
 }
