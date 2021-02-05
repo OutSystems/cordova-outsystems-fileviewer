@@ -494,3 +494,4 @@ tests/android/OSFileViewerTests/app/build/intermediates/project_dex_archive/debu
 tests/android/OSFileViewerTests/app/build/intermediates/project_dex_archive/debug/out/com/outsystems/plugins/fileviewer/OSOpenDocument.dex
 tests/android/OSFileViewerTests/app/build/intermediates/project_dex_archive/debug/out/com/outsystems/plugins/fileviewer/OSOpenFileChooser.dex
 tests/android/OSFileViewerTests/app/build/intermediates/project_dex_archive/debug/out/com/outsystems/plugins/fileviewer/OSPreviewDocument.dex
+tests/android/OSFileViewerTests/app/build/outputs/apk/debug/app-debug.apk
