@@ -14,16 +14,12 @@ public class OpenDocumentFromLocalPathTest {
 
     @Test
     public void given_ValidFilePath_When_CheckingIsPathValid_Then_FilePathIsValid(){
-
         assertTrue(OSOpenDocument.getInstance().isPathValid("file:///storage/emulated/0/android/media/com.outsystems.rd.FileViewerTest/nomePDF.pdf"));
-
     }
 
     @Test
     public void given_EmptyPath_When_CheckingIsPathValid_Then_PathIsNotValid(){
-
         assertFalse(OSOpenDocument.getInstance().isPathValid(""));
-
     }
 
 }
