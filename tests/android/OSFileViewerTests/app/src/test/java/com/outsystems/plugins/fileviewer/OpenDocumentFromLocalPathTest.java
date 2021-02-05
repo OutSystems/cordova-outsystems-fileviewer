@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -32,6 +33,12 @@ public class OpenDocumentFromLocalPathTest {
     public void given_pdfMimeType_When_GettingMimeTypeForPathWithPDFExtension_Then_PDFMimeTypeReturned() {
         GetMimeTypeMock mimeTypeMock = new GetMimeTypeMock();
         assertEquals("application/pdf", mimeTypeMock.determineMimeType("file:///storage/emulated/0/android/media/com.outsystems.rd.FileViewerTest/nomePDF.pdf"));
+    }
+
+    @Test
+    public void given_pdfMimeType_When_GettingMimeTypeForPathWithoutPDFExtension_Then_PDFMimeTypeNotReturned() {
+        GetMimeTypeMock mimeTypeMock = new GetMimeTypeMock();
+        assertNotEquals("application/pdf", mimeTypeMock.determineMimeType("file:///storage/emulated/0/android/media/com.outsystems.rd.FileViewerTest/documento.doc"));
     }
 
 }
