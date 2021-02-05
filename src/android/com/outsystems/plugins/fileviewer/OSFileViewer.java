@@ -110,7 +110,7 @@ public class OSFileViewer extends CordovaPlugin {
             return;
         }
 
-        callbackContext.error(buildErrorResponse(2, "Path of the file to open is invalid"));
+        callbackContext.error(buildErrorResponse(2, "Path of the file to open is either null or empty"));
     }
 
     /**
@@ -139,7 +139,7 @@ public class OSFileViewer extends CordovaPlugin {
             return;
         }
 
-        callbackContext.error(buildErrorResponse(2, "URL to open is invalid"));
+        callbackContext.error(buildErrorResponse(2, "URL to open is either null or empty"));
     }
 
     private void previewMediaContent(JSONArray args, CallbackContext callbackContext) {
