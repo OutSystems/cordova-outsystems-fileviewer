@@ -290,3 +290,8 @@ tests/android/OSFileViewerTests/app/build/intermediates/blame/res/debug/multi-v2
 tests/android/OSFileViewerTests/app/build/intermediates/blame/res/debug/multi-v2/values-night-v8.json
 tests/android/OSFileViewerTests/app/build/intermediates/blame/res/debug/multi-v2/values-ne.json
 *.bin
+tests/android/OSFileViewerTests/.gradle/6.5/fileContent/fileContent.lock
+tests/android/OSFileViewerTests/.gradle/6.5/gc.properties
+tests/android/OSFileViewerTests/.gradle/buildOutputCleanup/cache.properties
+tests/android/OSFileViewerTests/.gradle/checksums/checksums.lock
+tests/android/OSFileViewerTests/.gradle/vcs-1/gc.properties
