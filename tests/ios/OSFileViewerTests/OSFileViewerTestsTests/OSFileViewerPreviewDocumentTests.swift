@@ -12,41 +12,32 @@ class OSFileViewerPreviewDocumentTests: XCTestCase {
 
     func test_When_emptyPathPassed_Expect_invalidEmptyURL() throws {
         let fileViewerPlugin = FileViewerPlugin()
-        let urlStr = ""
-        
         do {
-            try fileViewerPlugin.previewDocumentFromLocalPath(url: urlStr)
+            try fileViewerPlugin.previewDocumentFromLocalPath(filePath: "")
             XCTFail("Did not throw error")
         } catch {
             XCTAssertEqual(error as? FileViewerErrors, .invalidEmptyURL)
         }
-        
     }
     
     func test_When_invalidPathPassed_Expect_fileDoesNotExist() throws {
         let fileViewerPlugin = FileViewerPlugin()
-        let urlStr = "aaaaaaaaaaaaaa"
-        
         do {
-            try fileViewerPlugin.previewDocumentFromLocalPath(url: urlStr)
+            try fileViewerPlugin.previewDocumentFromLocalPath(filePath: "aaaaaaaaaaaaaa")
             XCTFail("Did not throw error")
         } catch {
             XCTAssertEqual(error as? FileViewerErrors, .fileDoesNotExist)
         }
-    
     }
     
     func test_When_emptyUrlPassed_Expect_invalidURL() throws {
         let fileViewerPlugin = FileViewerPlugin()
-        let urlStr = ""
-        
         do {
-            try fileViewerPlugin.previewDocumentFromUrl(url: urlStr)
+            try fileViewerPlugin.previewDocumentFromUrl(url: "")
             XCTFail("Did not throw error")
         } catch {
             XCTAssertEqual(error as? FileViewerErrors, .invalidURL)
         }
-        
     }
 
 }

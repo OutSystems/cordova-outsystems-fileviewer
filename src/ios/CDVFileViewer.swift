@@ -1,23 +1,28 @@
+//
+//  FileViewerPlugin.swift
+//
+//  Created by Outsystems on 27/01/2021.
+//
 
 import UIKit
-
-var callbackId:String=""
 
 @objc(CDVFileViewer)
 class CDVFileViewer : CDVPlugin {
     
     var plugin: FileViewerPlugin!
+    var callbackId:String=""
     
     override func pluginInitialize() {
         plugin = FileViewerPlugin()
-        plugin.rootViewController = viewController
+        plugin.rootViewController = self.viewController
     }
 
     @objc(previewDocumentFromLocalPath:)
     func previewDocumentFromLocalPath(command: CDVInvokedUrlCommand) {
+        callbackId = command.callbackId
         let filePath = command.arguments[0] as? String ?? ""
         do {
-            try plugin.previewDocumentFromLocalPath(url: filePath)
+            try plugin.previewDocumentFromLocalPath(filePath: filePath)
         } catch {
             sendResult(result: "", error: error.localizedDescription)
         }
@@ -26,6 +31,7 @@ class CDVFileViewer : CDVPlugin {
     
     @objc(previewDocumentFromUrl:)
     func previewDocumentFromUrl(command: CDVInvokedUrlCommand) {
+        callbackId = command.callbackId
         let url = command.arguments[0] as? String ?? ""
         do {
             try plugin.previewDocumentFromUrl(url: url)
@@ -36,9 +42,10 @@ class CDVFileViewer : CDVPlugin {
     
     @objc(openDocumentFromLocalPath:)
     func openDocumentFromLocalPath(command: CDVInvokedUrlCommand) {
+        callbackId = command.callbackId
         let filePath = command.arguments[0] as? String ?? ""
         do {
-            try plugin.openDocumentFromLocalPath(url: filePath)
+            try plugin.openDocumentFromLocalPath(filePath: filePath)
         } catch {
             sendResult(result: "", error: error.localizedDescription)
         }
@@ -46,6 +53,7 @@ class CDVFileViewer : CDVPlugin {
     
     @objc(openDocumentFromUrl:)
     func openDocumentFromUrl(command: CDVInvokedUrlCommand) {
+        callbackId = command.callbackId
         let url = command.arguments[0] as? String ?? ""
         do {
             try plugin.openDocumentFromUrl(url: url)
@@ -56,9 +64,10 @@ class CDVFileViewer : CDVPlugin {
     
     @objc(previewMediaContent:)
     func previewMediaContent(command: CDVInvokedUrlCommand) {
+        callbackId = command.callbackId
         let url = command.arguments[0] as? String ?? ""
         do {
-            try plugin.previewMediaContent(url: url)
+            try plugin.previewMediaContent(filePath: url)
         } catch {
             sendResult(result: "", error: error.localizedDescription)
         }

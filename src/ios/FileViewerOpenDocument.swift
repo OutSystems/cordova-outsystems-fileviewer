@@ -29,10 +29,10 @@ class FileViewerOpenDocument: NSObject {
         })
     }
     
-    func openDocumentFromLocalPath(url:URL) throws {
+    func openDocumentFromLocalPath(filePath:URL) throws {
         self.documentInteractionController = UIDocumentInteractionController.init()
         self.documentInteractionController?.delegate = self
-        self.documentInteractionController?.url = url.standardized
+        self.documentInteractionController?.url = filePath.standardized
         self.documentInteractionController?.presentPreview(animated: true)
     }
     
