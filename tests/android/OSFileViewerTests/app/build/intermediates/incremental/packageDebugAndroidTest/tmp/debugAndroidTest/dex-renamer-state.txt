@@ -1,7 +1,0 @@
-#Thu Feb 04 16:07:06 WET 2021
-base.0=/Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/build/intermediates/dex/debugAndroidTest/mergeExtDexDebugAndroidTest/classes.dex
-path.1=classes.dex
-renamed.1=classes2.dex
-path.0=classes.dex
-renamed.0=classes.dex
-base.1=/Users/cin/Documents/Work/Tasks/RMET-440FileViewer/folderRepoWithTestsFromGenerator/cordova-outsystems-fileviewer/tests/android/OSFileViewerTests/app/build/intermediates/dex/debugAndroidTest/mergeProjectDexDebugAndroidTest/classes.dex
