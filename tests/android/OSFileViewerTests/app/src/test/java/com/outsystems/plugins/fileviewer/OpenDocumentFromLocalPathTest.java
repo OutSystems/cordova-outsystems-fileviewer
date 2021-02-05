@@ -28,4 +28,10 @@ public class OpenDocumentFromLocalPathTest {
         assertFalse(OSOpenDocument.getInstance().isPathValid(""));
     }
 
+    @Test
+    public void given_pdfMimeType_When_GettingMimeTypeForPathWithPDFExtension_Then_PDFMimeTypeReturned() {
+        GetMimeTypeMock mimeTypeMock = new GetMimeTypeMock();
+        assertEquals("application/pdf", mimeTypeMock.determineMimeType("file:///storage/emulated/0/android/media/com.outsystems.rd.FileViewerTest/nomePDF.pdf"));
+    }
+
 }
