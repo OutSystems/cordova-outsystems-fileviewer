@@ -13,8 +13,13 @@ import static org.junit.Assert.assertTrue;
 public class OpenDocumentFromLocalPathTest {
 
     @Test
-    public void given_ValidFilePath_When_CheckingIsPathValid_Then_FilePathIsValid(){
+    public void given_ValidFilePathPDF_When_CheckingIsPathValid_Then_FilePathIsValid(){
         assertTrue(OSOpenDocument.getInstance().isPathValid("file:///storage/emulated/0/android/media/com.outsystems.rd.FileViewerTest/nomePDF.pdf"));
+    }
+
+    @Test
+    public void given_ValidFilePathVideo_When_CheckingIsPathValid_Then_FilePathIsValid(){
+        assertTrue(OSOpenDocument.getInstance().isPathValid("file:///storage/emulated/0/Android/data/com.outsystemsenterprise.enmobile11dev.FileSampleApp/files/Downloads/video_sample.mp4"));
     }
 
     @Test
