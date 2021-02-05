@@ -23,6 +23,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 public class OSFileViewer extends CordovaPlugin {
@@ -132,6 +133,8 @@ public class OSFileViewer extends CordovaPlugin {
                 callbackContext.success();
             } catch (ActivityNotFoundException e) {
                 callbackContext.error(buildErrorResponse(5, "There is no app to open this document"));
+            } catch (MalformedURLException e) {
+                callbackContext.error(buildErrorResponse(7, "The URL you are trying to open is malformed"));
             }
             return;
         }

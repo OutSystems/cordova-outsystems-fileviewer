@@ -10,6 +10,9 @@ import androidx.core.content.FileProvider;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class OSOpenDocument {
 
@@ -35,9 +38,14 @@ public class OSOpenDocument {
         }
     }
 
-    public void openDocumentFromURL(Activity activity, String url) throws ActivityNotFoundException{
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        activity.startActivity(intent);
+    public void openDocumentFromURL(Activity activity, String url) throws ActivityNotFoundException, MalformedURLException{
+        if(isURLValid(url)){
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            activity.startActivity(intent);
+        }
+        else{
+            throw new MalformedURLException();
+        }
     }
 
     public static String getMimeType(String url) {
@@ -58,6 +66,15 @@ public class OSOpenDocument {
         return (path != null && path.length() > 0);
     }
 
+    public boolean isURLValid(String url){
+        Pattern p = Pattern.compile("http[s]?://(([^/:.[:space:]]+(.[^/:.[:space:]]+)*)|([0-9](.[0-9]{3})))(:[0-9]+)?((/[^?#[:space:]]+)([^#[:space:]]+)?(#.+)?)?");
+        Matcher m = p.matcher(url);
+
+        if(m.find()){
+            return true;
+        }
+        return false;
+    }
 
     //Singleton
     private static OSOpenDocument instance;
