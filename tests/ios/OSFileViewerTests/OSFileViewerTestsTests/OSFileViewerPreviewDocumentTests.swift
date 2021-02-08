@@ -32,12 +32,15 @@ class OSFileViewerPreviewDocumentTests: XCTestCase {
     
     func test_When_emptyUrlPassed_Expect_invalidURL() throws {
         let fileViewerPlugin = FileViewerPlugin()
-        do {
-            try fileViewerPlugin.previewDocumentFromUrl(url: "")
-            XCTFail("Did not throw error")
-        } catch {
-            XCTAssertEqual(error as? FileViewerErrors, .invalidURL)
-        }
+        fileViewerPlugin.previewDocumentFromUrl(url: "", completion: { (inner: ErrorCompletionHandler) in
+            do {
+                _ = try inner()
+                XCTFail("Did not throw error")
+            } catch {
+                XCTAssertEqual(error as? FileViewerErrors, .invalidURL)
+            }
+        })
+
     }
 
 }
