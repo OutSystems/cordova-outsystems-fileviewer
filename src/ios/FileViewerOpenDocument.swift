@@ -16,15 +16,18 @@ class FileViewerOpenDocument: NSObject {
         self.viewController = viewController
     }
 
-    func openDocumentFromUrl(url:URL) throws {
-        FileDownloader.downloadfile(url: url, completion: {(success, fileLocationURL) in
-            if success, let filePath = fileLocationURL {
+    func openDocumentFromUrl(url:URL, completion: @escaping (_ inner:ErrorCompletionHandler) -> Void) -> Void {
+        FileDownloader.downloadFile(url:url, completion: { (success, inner: URLCompletionHandler) in
+            do {
+                let result = try inner()
                 DispatchQueue.main.async {
-                    self.documentInteractionController = UIDocumentInteractionController.init(url: filePath.standardized)
-                    self.documentInteractionController?.delegate = self
-                    self.documentInteractionController?.uti = filePath.uti
-                    self.documentInteractionController?.presentPreview(animated: true)
+                self.documentInteractionController = UIDocumentInteractionController.init(url: result.standardized)
+                self.documentInteractionController?.delegate = self
+                self.documentInteractionController?.uti = result.uti
+                self.documentInteractionController?.presentPreview(animated: true)
                 }
+            } catch let error {
+                DispatchQueue.main.async { completion({ throw error }) }
             }
         })
     }
@@ -39,18 +42,14 @@ class FileViewerOpenDocument: NSObject {
 }
 
 extension FileViewerOpenDocument: UIDocumentInteractionControllerDelegate {
-   
     //MARK: UIDocumentInteractionControllerDelegate
     func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
         return self.viewController!
     }
-    
 }
 
 extension URL {
-
     var uti: String {
         return (try? self.resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier ?? "public.data"
     }
-
 }

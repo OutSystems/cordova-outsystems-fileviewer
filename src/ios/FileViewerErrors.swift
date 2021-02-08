@@ -12,6 +12,7 @@ enum FileViewerErrors: String, Error {
     case couldNotOpenDocument = "Could not open the document"
     case invalidURL = "The URL you are trying to open is malformed"
     case invalidEmptyURL = "Invalid empty URL"
+    case downloadFailed = "The download failed"
 }
 
 extension FileViewerErrors : LocalizedError {

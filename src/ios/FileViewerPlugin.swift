@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 class FileViewerPlugin {
    
@@ -28,26 +27,37 @@ class FileViewerPlugin {
 
     }
     
-    func openDocumentFromUrl(url:String) throws {
-        guard url.isValidUrl() else { throw FileViewerErrors.invalidURL }
+    func openDocumentFromUrl(url:String, completion: @escaping (_ inner: ErrorCompletionHandler) -> Void) {
+        guard url.isValidUrl() else {
+            return completion({ throw FileViewerErrors.invalidURL })
+        }
         
         if let fileUrl = URL(string: url), let viewController = rootViewController {
             let fileViewerOpenDocument = FileViewerOpenDocument(viewController: viewController)
-            try fileViewerOpenDocument.openDocumentFromUrl(url: fileUrl)
-        } else {
-            throw FileViewerErrors.couldNotOpenDocument
+            fileViewerOpenDocument.openDocumentFromUrl(url:fileUrl, completion: { (inner: ErrorCompletionHandler) -> Void in
+                do {
+                    _ = try inner()
+                } catch {
+                    completion({ throw error })
+                }
+            })
         }
+
     }
     
-    func previewDocumentFromUrl(url:String) throws {
-        guard url.isValidUrl() else { throw FileViewerErrors.invalidURL}
-        
-        if let fileUrl = URL(string: url), let viewController = rootViewController {
-            let fileViewerPreview = FileViewerPreview(viewController: viewController)
-            try fileViewerPreview.previewDocumentFromUrl(url: fileUrl)
-        } else {
-            throw FileViewerErrors.couldNotOpenDocument
+    func previewDocumentFromUrl(url:String, completion: @escaping (_ inner: ErrorCompletionHandler) -> Void) {
+        guard url.isValidUrl() else {
+            return completion({ throw FileViewerErrors.invalidURL })
         }
+        
+        let fileViewerPreview = FileViewerPreview(viewController: rootViewController!)
+        fileViewerPreview.previewDocumentFromUrl(url:URL(string: url)!, completion: { (inner: ErrorCompletionHandler) -> Void in
+            do {
+                _ = try inner()
+            } catch {
+                completion({ throw error })
+            }
+        })
     }
     
     func previewDocumentFromLocalPath(filePath:String) throws {

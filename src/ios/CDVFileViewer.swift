@@ -1,5 +1,6 @@
 //
 //  FileViewerPlugin.swift
+//  FileViewer
 //
 //  Created by Outsystems on 27/01/2021.
 //
@@ -26,18 +27,19 @@ class CDVFileViewer : CDVPlugin {
         } catch {
             sendResult(result: "", error: error.localizedDescription)
         }
-
     }
     
     @objc(previewDocumentFromUrl:)
     func previewDocumentFromUrl(command: CDVInvokedUrlCommand) {
         callbackId = command.callbackId
         let url = command.arguments[0] as? String ?? ""
-        do {
-            try plugin.previewDocumentFromUrl(url: url)
-        } catch {
-            sendResult(result: "", error: error.localizedDescription)
-        }
+        plugin.previewDocumentFromUrl(url: url, completion: { (inner: ErrorCompletionHandler) in
+            do {
+                _ = try inner()
+            } catch {
+                self.sendResult(result: "", error: error.localizedDescription)
+            }
+        })
     }
     
     @objc(openDocumentFromLocalPath:)
@@ -55,19 +57,21 @@ class CDVFileViewer : CDVPlugin {
     func openDocumentFromUrl(command: CDVInvokedUrlCommand) {
         callbackId = command.callbackId
         let url = command.arguments[0] as? String ?? ""
-        do {
-            try plugin.openDocumentFromUrl(url: url)
-        } catch {
-            sendResult(result: "", error: error.localizedDescription)
-        }
+        plugin.openDocumentFromUrl(url: url, completion: { (inner: ErrorCompletionHandler) -> Void in
+            do {
+                _ = try inner()
+            } catch {
+                self.sendResult(result: "", error: error.localizedDescription)
+            }
+        })
     }
     
     @objc(previewMediaContent:)
     func previewMediaContent(command: CDVInvokedUrlCommand) {
         callbackId = command.callbackId
-        let url = command.arguments[0] as? String ?? ""
+        let filePath = command.arguments[0] as? String ?? ""
         do {
-            try plugin.previewMediaContent(filePath: url)
+            try plugin.previewMediaContent(filePath: filePath)
         } catch {
             sendResult(result: "", error: error.localizedDescription)
         }
