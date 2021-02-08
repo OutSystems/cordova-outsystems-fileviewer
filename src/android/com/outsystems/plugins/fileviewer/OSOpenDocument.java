@@ -16,11 +16,8 @@ import java.util.regex.Pattern;
 
 public class OSOpenDocument {
 
-    public void openDocumentFromLocalPath(Activity activity, String filePath, String mimeType) throws ActivityNotFoundException, FileNotFoundException {
-        if(mimeType.equals("")){
-            mimeType = getMimeType(filePath);
-        }
-
+    public void openDocumentFromLocalPath(Activity activity, String filePath) throws ActivityNotFoundException, FileNotFoundException {
+        String mimeType = getMimeType(filePath);
         File file = new File(filePath.replace("file:///", ""));
 
         if(file.exists()){

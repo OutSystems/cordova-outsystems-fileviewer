@@ -7,8 +7,8 @@
 
 import UIKit
 
-@objc(CDVFileViewer)
-class CDVFileViewer : CDVPlugin {
+@objc(OSFileViewer)
+class OSFileViewer : CDVPlugin {
     
     var plugin: FileViewerPlugin!
     var callbackId:String=""

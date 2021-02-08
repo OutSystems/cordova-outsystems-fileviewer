@@ -92,7 +92,6 @@ public class OSFileViewer extends CordovaPlugin {
         String mimeType = null;
         try {
             filePath = args.getString(0);
-            mimeType = args.getString(1);
         } catch (JSONException e) {
             callbackContext.error(buildErrorResponse(1, "Invalid arguments"));
             return;
@@ -100,7 +99,7 @@ public class OSFileViewer extends CordovaPlugin {
 
         if (OSOpenDocument.getInstance().isPathValid(filePath)) {
             try {
-                OSOpenDocument.getInstance().openDocumentFromLocalPath(this.cordova.getActivity(), filePath, mimeType);
+                OSOpenDocument.getInstance().openDocumentFromLocalPath(this.cordova.getActivity(), filePath);
                 callbackContext.success();
             } catch (ActivityNotFoundException e) {
                 callbackContext.error(buildErrorResponse(5, "There is no app to open this document"));
