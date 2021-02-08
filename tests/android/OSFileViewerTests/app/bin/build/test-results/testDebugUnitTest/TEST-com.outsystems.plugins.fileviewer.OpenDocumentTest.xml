@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.outsystems.plugins.fileviewer.OpenDocumentFromURLTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-02-03T19:07:11" hostname="os-60vy1z2.domain.outsystems.com" time="0.001">
+  <properties/>
+  <testcase name="isPathValid_FilePathSuccess" classname="com.outsystems.plugins.fileviewer.OpenDocumentFromURLTest" time="0.0"/>
+  <testcase name="isPathValid_FilePathError" classname="com.outsystems.plugins.fileviewer.OpenDocumentFromURLTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

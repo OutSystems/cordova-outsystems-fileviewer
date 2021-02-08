@@ -1,0 +1,4 @@
+com/outsystems/plugins/fileviewer/test/BuildConfig.java
+ com.outsystems.plugins.fileviewer.test.BuildConfig
+com/outsystems/plugins/fileviewer/ExampleInstrumentedTest.java
+ com.outsystems.plugins.fileviewer.ExampleInstrumentedTest

@@ -1,0 +1,12 @@
+com/outsystems/plugins/fileviewer/OSOpenFileChooser.java
+ com.outsystems.plugins.fileviewer.OSOpenFileChooser
+com/outsystems/plugins/fileviewer/OSFileViewer.java
+ com.outsystems.plugins.fileviewer.OSFileViewer
+com/outsystems/osfileviewertests/BuildConfig.java
+ com.outsystems.osfileviewertests.BuildConfig
+com/outsystems/plugins/fileviewer/OSOpenDocument.java
+ com.outsystems.plugins.fileviewer.OSOpenDocument
+com/outsystems/plugins/fileviewer/OSPreviewDocument.java
+ com.outsystems.plugins.fileviewer.OSPreviewDocument
+com/outsystems/plugins/fileviewer/OSGetMimeType.java
+ com.outsystems.plugins.fileviewer.OSGetMimeType

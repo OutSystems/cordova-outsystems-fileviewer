@@ -1,0 +1,8 @@
+com/outsystems/plugins/fileviewer/ExampleUnitTest.java
+ OSFileViewer.ExampleUnitTest
+com/outsystems/plugins/fileviewer/OpenDocumentFromURLTest.java
+ com.outsystems.plugins.fileviewer.OpenDocumentFromURLTest
+com/outsystems/plugins/fileviewer/GetMimeTypeMock.java
+ com.outsystems.plugins.fileviewer.GetMimeTypeMock
+com/outsystems/plugins/fileviewer/OpenDocumentFromLocalPathTest.java
+ com.outsystems.plugins.fileviewer.OpenDocumentFromLocalPathTest
