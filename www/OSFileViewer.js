@@ -16,8 +16,8 @@ exports.openDocumentFromUrl = function (url, success, error) {
     exec(success, error, 'OSFileViewer', 'openDocumentFromUrl', [url]);
 };
 
-exports.previewMediaContentFromLocalPath = function (url, success, error) {
-    exec(success, error, 'OSFileViewer', 'previewMediaContentFromLocalPath', [url]);
+exports.previewMediaContentFromLocalPath = function (filePath, success, error) {
+    exec(success, error, 'OSFileViewer', 'previewMediaContentFromLocalPath', [filePath]);
 };
 
 exports.previewMediaContentFromUrl = function (url, success, error) {
