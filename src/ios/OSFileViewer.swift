@@ -66,12 +66,23 @@ class OSFileViewer : CDVPlugin {
         })
     }
     
-    @objc(previewMediaContent:)
-    func previewMediaContent(command: CDVInvokedUrlCommand) {
+    @objc(previewMediaContentFromLocalPath:)
+    func previewMediaContentFromLocalPath(command: CDVInvokedUrlCommand) {
         callbackId = command.callbackId
         let filePath = command.arguments[0] as? String ?? ""
         do {
-            try plugin.previewMediaContent(filePath: filePath)
+            try plugin.previewMediaContentFromLocalPath(filePath: filePath)
+        } catch {
+            sendResult(result: "", error: error.localizedDescription)
+        }
+    }
+    
+    @objc(previewMediaContentFromUrl:)
+    func previewMediaContentFromUrl(command: CDVInvokedUrlCommand) {
+        callbackId = command.callbackId
+        let url = command.arguments[0] as? String ?? ""
+        do {
+            try plugin.previewMediaContentFromUrl(url: url)
         } catch {
             sendResult(result: "", error: error.localizedDescription)
         }

@@ -43,8 +43,8 @@ class FileViewerPreview {
         })
     }
     
-    func previewMediaContent(filePath:URL) throws {
-        let player = AVPlayer(url: filePath.standardized)
+    func previewMediaContent(url:URL) throws {
+        let player = AVPlayer(url: url.standardized)
         let playerViewController = AVPlayerViewController()
         playerViewController.player = player
         viewController?.present(playerViewController, animated: true) {

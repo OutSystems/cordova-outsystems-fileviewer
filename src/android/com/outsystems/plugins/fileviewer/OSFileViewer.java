@@ -32,7 +32,8 @@ public class OSFileViewer extends CordovaPlugin {
     private final static String KEY_ACTION_PREVIEW_DOCUMENT_FROM_URL = "previewDocumentFromUrl";
     private final static String KEY_ACTION_OPEN_DOCUMENT_FROM_FILE_PATH = "openDocumentFromLocalPath";
     private final static String KEY_ACTION_OPEN_DOCUMENT_FROM_URL = "openDocumentFromUrl";
-    private final static String KEY_ACTION_PREVIEW_MEDIA_CONTENT = "previewMediaContent";
+    private final static String KEY_ACTION_PREVIEW_MEDIA_CONTENT_FILE_PATH = "previewMediaContentFromLocalPath";
+    private final static String KEY_ACTION_PREVIEW_MEDIA_CONTENT_URL = "previewMediaContentFromUrl";
     private final static String KEY_ACTION_OPEN_FILE_CHOOSER = "openFileChooser";
 
     //permission codes
@@ -62,8 +63,12 @@ public class OSFileViewer extends CordovaPlugin {
             this.openDocumentFromUrl(args, callbackContext);
             return true;
         }
-        else if (action.equals(KEY_ACTION_PREVIEW_MEDIA_CONTENT)) {
+        else if (action.equals(KEY_ACTION_PREVIEW_MEDIA_CONTENT_FILE_PATH))  {
             this.openDocumentFromLocalPath(args, callbackContext);
+            return true;
+        }
+        else if (action.equals(KEY_ACTION_PREVIEW_MEDIA_CONTENT_URL))  {
+            this.openDocumentFromUrl(args, callbackContext);
             return true;
         }
         else if (action.equals(KEY_ACTION_OPEN_FILE_CHOOSER)) {
