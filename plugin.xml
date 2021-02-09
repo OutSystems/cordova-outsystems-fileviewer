@@ -33,8 +33,8 @@
   </platform>
   <platform name="ios">
     <config-file parent="/*" target="config.xml">
-      <feature name="CDVFileViewer">
-        <param name="ios-package" value="CDVFileViewer"/>
+      <feature name="OSFileViewer">
+        <param name="ios-package" value="OSFileViewer"/>
       </feature>
     </config-file>
     <dependency url="https://github.com/agoncalvesos/cordova-plugin-add-swift-support" commit="513e43f94ae94ad609d49f24e7dca23a4c358095" id="cordova-plugin-add-swift-support"/>
