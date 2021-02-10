@@ -1,0 +1,55 @@
+//
+//  FileViewerOpenDocument.swift
+//  File Sample App
+//
+//  Created by Carlos Correa on 02/02/2021.
+//
+
+import UIKit
+
+class FileViewerOpenDocument: NSObject {
+    
+    var documentInteractionController:UIDocumentInteractionController?
+    weak var viewController: UIViewController?
+    
+    init(viewController: UIViewController) {
+        self.viewController = viewController
+    }
+
+    func openDocumentFromUrl(url:URL, completion: @escaping (_ inner:ErrorCompletionHandler) -> Void) -> Void {
+        FileDownloader.downloadFile(url:url, completion: { (success, inner: URLCompletionHandler) in
+            do {
+                let result = try inner()
+                DispatchQueue.main.async {
+                self.documentInteractionController = UIDocumentInteractionController.init(url: result.standardized)
+                self.documentInteractionController?.delegate = self
+                self.documentInteractionController?.uti = result.uti
+                self.documentInteractionController?.presentPreview(animated: true)
+                }
+            } catch let error {
+                DispatchQueue.main.async { completion({ throw error }) }
+            }
+        })
+    }
+    
+    func openDocumentFromLocalPath(filePath:URL) throws {
+        self.documentInteractionController = UIDocumentInteractionController.init()
+        self.documentInteractionController?.delegate = self
+        self.documentInteractionController?.url = filePath.standardized
+        self.documentInteractionController?.presentPreview(animated: true)
+    }
+    
+}
+
+extension FileViewerOpenDocument: UIDocumentInteractionControllerDelegate {
+    //MARK: UIDocumentInteractionControllerDelegate
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        return self.viewController!
+    }
+}
+
+extension URL {
+    var uti: String {
+        return (try? self.resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier ?? "public.data"
+    }
+}
