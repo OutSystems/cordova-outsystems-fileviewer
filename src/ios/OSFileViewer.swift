@@ -24,9 +24,9 @@ class OSFileViewer : CDVPlugin {
         
         let url = command.arguments[0] as? String ?? ""
         if url.isValidUrl() {
-            sendResult(result: "", error: "")
+            sendResult(result: "true", error: "")
         } else {
-            sendResult(result: "", error: FileViewerErrors.invalidURL.rawValue)
+            sendResult(result: "false", error: "")
         }
     }
 

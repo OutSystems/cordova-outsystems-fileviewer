@@ -178,10 +178,10 @@ public class OSFileViewer extends CordovaPlugin {
             return;
         }
         if(OSOpenDocument.getInstance().isURLValid(url)){
-            callbackContext.success();
+            callbackContext.success("true");
         }
         else {
-            callbackContext.error(buildErrorResponse(7, "The URL you are trying to open is malformed"));
+            callbackContext.success("false");
         }
     }
 
