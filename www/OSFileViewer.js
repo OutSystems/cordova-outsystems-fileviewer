@@ -23,3 +23,7 @@ exports.previewMediaContentFromLocalPath = function (filePath, success, error) {
 exports.previewMediaContentFromUrl = function (url, success, error) {
     exec(success, error, 'OSFileViewer', 'previewMediaContentFromUrl', [url]);
 };
+
+exports.isValidURL = function (url, success, error) {
+    exec(success, error, 'OSFileViewer', 'isValidURL', [url]);
+};

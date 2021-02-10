@@ -35,6 +35,7 @@ public class OSFileViewer extends CordovaPlugin {
     private final static String KEY_ACTION_PREVIEW_MEDIA_CONTENT_FILE_PATH = "previewMediaContentFromLocalPath";
     private final static String KEY_ACTION_PREVIEW_MEDIA_CONTENT_URL = "previewMediaContentFromUrl";
     private final static String KEY_ACTION_OPEN_FILE_CHOOSER = "openFileChooser";
+    private final static String KEY_ACTION_IS_VALID_URL = "isValidURL";
 
     //permission codes
     public static final int WRITE = 3;
@@ -73,6 +74,10 @@ public class OSFileViewer extends CordovaPlugin {
         }
         else if (action.equals(KEY_ACTION_OPEN_FILE_CHOOSER)) {
             this.openFileChooser(args, callbackContext);
+            return true;
+        } 
+        else if (action.equals(KEY_ACTION_IS_VALID_URL)) {
+            this.isValidURL(args, callbackContext);
             return true;
         }
         return false;
@@ -161,6 +166,22 @@ public class OSFileViewer extends CordovaPlugin {
             callbackContext.success();
         } catch (ActivityNotFoundException e) {
             callbackContext.error(buildErrorResponse(6, "There is no app to browse files with"));
+        }
+    }
+
+    private void isValidURL(JSONArray args, CallbackContext callbackContext) {
+        String url = null;
+        try {
+            url = args.getString(0);
+        } catch (JSONException e) {
+            callbackContext.error(buildErrorResponse(1, "Invalid arguments"));
+            return;
+        }
+        if(OSOpenDocument.getInstance().isURLValid(url)){
+            callbackContext.success();
+        }
+        else {
+            callbackContext.error(buildErrorResponse(7, "The URL you are trying to open is malformed"));
         }
     }
 

@@ -17,6 +17,18 @@ class OSFileViewer : CDVPlugin {
         plugin = FileViewerPlugin()
         plugin.rootViewController = self.viewController
     }
+    
+    @objc(isValidURL:)
+    func isValidURL(command: CDVInvokedUrlCommand) {
+        callbackId = command.callbackId
+        
+        let url = command.arguments[0] as? String ?? ""
+        if url.isValidUrl() {
+            sendResult(result: "", error: "")
+        } else {
+            sendResult(result: "", error: FileViewerErrors.invalidURL.rawValue)
+        }
+    }
 
     @objc(previewDocumentFromLocalPath:)
     func previewDocumentFromLocalPath(command: CDVInvokedUrlCommand) {
