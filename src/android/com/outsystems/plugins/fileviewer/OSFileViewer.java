@@ -188,8 +188,8 @@ public class OSFileViewer extends CordovaPlugin {
     private JSONObject buildErrorResponse(int errorCode, String errorMessage) {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("error_code", errorCode);
-            jsonObject.put("error_message", errorMessage);
+            jsonObject.put("code", errorCode);
+            jsonObject.put("message", errorMessage);
         } catch (JSONException e) {
             Log.e("FileViewer", e.toString());
         }

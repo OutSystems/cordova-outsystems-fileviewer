@@ -108,8 +108,8 @@ class OSFileViewer : CDVPlugin {
             let resultArray = [result]
             pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: resultArray)
         } else {
-            let resultErrorArray = [error]
-            pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: resultErrorArray);
+            let errorDict = ["code": "0", "message": error]
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: errorDict);
         }
         self.commandDelegate!.send(pluginResult, callbackId: callbackId);
         
