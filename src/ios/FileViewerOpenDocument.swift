@@ -21,10 +21,14 @@ class FileViewerOpenDocument: NSObject {
             do {
                 let result = try inner()
                 DispatchQueue.main.async {
-                self.documentInteractionController = UIDocumentInteractionController.init(url: result.standardized)
-                self.documentInteractionController?.delegate = self
-                self.documentInteractionController?.uti = result.uti
-                self.documentInteractionController?.presentPreview(animated: true)
+                    self.documentInteractionController = UIDocumentInteractionController()
+                    self.documentInteractionController?.delegate = self
+                    self.documentInteractionController?.url = result.destinationUrl
+                    if let urlStr = result.destinationUrl?.standardized {
+                        self.documentInteractionController?.uti = urlStr.uti
+                    }
+                    self.documentInteractionController?.name = result.name
+                    self.documentInteractionController?.presentPreview(animated: true)
                 }
             } catch let error {
                 DispatchQueue.main.async { completion({ throw error }) }

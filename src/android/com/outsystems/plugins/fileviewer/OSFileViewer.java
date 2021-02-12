@@ -32,8 +32,10 @@ public class OSFileViewer extends CordovaPlugin {
     private final static String KEY_ACTION_PREVIEW_DOCUMENT_FROM_URL = "previewDocumentFromUrl";
     private final static String KEY_ACTION_OPEN_DOCUMENT_FROM_FILE_PATH = "openDocumentFromLocalPath";
     private final static String KEY_ACTION_OPEN_DOCUMENT_FROM_URL = "openDocumentFromUrl";
-    private final static String KEY_ACTION_PREVIEW_MEDIA_CONTENT = "previewMediaContent";
+    private final static String KEY_ACTION_PREVIEW_MEDIA_CONTENT_FILE_PATH = "previewMediaContentFromLocalPath";
+    private final static String KEY_ACTION_PREVIEW_MEDIA_CONTENT_URL = "previewMediaContentFromUrl";
     private final static String KEY_ACTION_OPEN_FILE_CHOOSER = "openFileChooser";
+    private final static String KEY_ACTION_IS_VALID_URL = "isValidURL";
 
     //permission codes
     public static final int WRITE = 3;
@@ -62,12 +64,20 @@ public class OSFileViewer extends CordovaPlugin {
             this.openDocumentFromUrl(args, callbackContext);
             return true;
         }
-        else if (action.equals(KEY_ACTION_PREVIEW_MEDIA_CONTENT)) {
+        else if (action.equals(KEY_ACTION_PREVIEW_MEDIA_CONTENT_FILE_PATH))  {
             this.openDocumentFromLocalPath(args, callbackContext);
+            return true;
+        }
+        else if (action.equals(KEY_ACTION_PREVIEW_MEDIA_CONTENT_URL))  {
+            this.openDocumentFromUrl(args, callbackContext);
             return true;
         }
         else if (action.equals(KEY_ACTION_OPEN_FILE_CHOOSER)) {
             this.openFileChooser(args, callbackContext);
+            return true;
+        } 
+        else if (action.equals(KEY_ACTION_IS_VALID_URL)) {
+            this.isValidURL(args, callbackContext);
             return true;
         }
         return false;
@@ -92,7 +102,6 @@ public class OSFileViewer extends CordovaPlugin {
         String mimeType = null;
         try {
             filePath = args.getString(0);
-            mimeType = args.getString(1);
         } catch (JSONException e) {
             callbackContext.error(buildErrorResponse(1, "Invalid arguments"));
             return;
@@ -100,7 +109,7 @@ public class OSFileViewer extends CordovaPlugin {
 
         if (OSOpenDocument.getInstance().isPathValid(filePath)) {
             try {
-                OSOpenDocument.getInstance().openDocumentFromLocalPath(this.cordova.getActivity(), filePath, mimeType);
+                OSOpenDocument.getInstance().openDocumentFromLocalPath(this.cordova.getActivity(), filePath);
                 callbackContext.success();
             } catch (ActivityNotFoundException e) {
                 callbackContext.error(buildErrorResponse(5, "There is no app to open this document"));
@@ -160,11 +169,27 @@ public class OSFileViewer extends CordovaPlugin {
         }
     }
 
+    private void isValidURL(JSONArray args, CallbackContext callbackContext) {
+        String url = null;
+        try {
+            url = args.getString(0);
+        } catch (JSONException e) {
+            callbackContext.error(buildErrorResponse(1, "Invalid arguments"));
+            return;
+        }
+        if(OSOpenDocument.getInstance().isURLValid(url)){
+            callbackContext.success("true");
+        }
+        else {
+            callbackContext.success("false");
+        }
+    }
+
     private JSONObject buildErrorResponse(int errorCode, String errorMessage) {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("error_code", errorCode);
-            jsonObject.put("error_message", errorMessage);
+            jsonObject.put("code", errorCode);
+            jsonObject.put("message", errorMessage);
         } catch (JSONException e) {
             Log.e("FileViewer", e.toString());
         }

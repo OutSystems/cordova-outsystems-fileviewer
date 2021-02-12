@@ -7,8 +7,8 @@
 
 import UIKit
 
-@objc(CDVFileViewer)
-class CDVFileViewer : CDVPlugin {
+@objc(OSFileViewer)
+class OSFileViewer : CDVPlugin {
     
     var plugin: FileViewerPlugin!
     var callbackId:String=""
@@ -16,6 +16,18 @@ class CDVFileViewer : CDVPlugin {
     override func pluginInitialize() {
         plugin = FileViewerPlugin()
         plugin.rootViewController = self.viewController
+    }
+    
+    @objc(isValidURL:)
+    func isValidURL(command: CDVInvokedUrlCommand) {
+        callbackId = command.callbackId
+        
+        let url = command.arguments[0] as? String ?? ""
+        if url.isValidUrl() {
+            sendResult(result: "true", error: "")
+        } else {
+            sendResult(result: "false", error: "")
+        }
     }
 
     @objc(previewDocumentFromLocalPath:)
@@ -66,12 +78,23 @@ class CDVFileViewer : CDVPlugin {
         })
     }
     
-    @objc(previewMediaContent:)
-    func previewMediaContent(command: CDVInvokedUrlCommand) {
+    @objc(previewMediaContentFromLocalPath:)
+    func previewMediaContentFromLocalPath(command: CDVInvokedUrlCommand) {
         callbackId = command.callbackId
         let filePath = command.arguments[0] as? String ?? ""
         do {
-            try plugin.previewMediaContent(filePath: filePath)
+            try plugin.previewMediaContentFromLocalPath(filePath: filePath)
+        } catch {
+            sendResult(result: "", error: error.localizedDescription)
+        }
+    }
+    
+    @objc(previewMediaContentFromUrl:)
+    func previewMediaContentFromUrl(command: CDVInvokedUrlCommand) {
+        callbackId = command.callbackId
+        let url = command.arguments[0] as? String ?? ""
+        do {
+            try plugin.previewMediaContentFromUrl(url: url)
         } catch {
             sendResult(result: "", error: error.localizedDescription)
         }
@@ -85,8 +108,8 @@ class CDVFileViewer : CDVPlugin {
             let resultArray = [result]
             pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: resultArray)
         } else {
-            let resultErrorArray = [error]
-            pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: resultErrorArray);
+            let errorDict = ["code": "0", "message": error]
+            pluginResult = CDVPluginResult(status: CDVCommandStatus_ERROR, messageAs: errorDict);
         }
         self.commandDelegate!.send(pluginResult, callbackId: callbackId);
         

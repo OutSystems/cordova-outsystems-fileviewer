@@ -75,7 +75,7 @@ class FileViewerPlugin {
 
     }
     
-    func previewMediaContent(filePath:String) throws {
+    func previewMediaContentFromLocalPath(filePath:String) throws {
         guard !filePath.isEmpty else { throw FileViewerErrors.invalidEmptyURL }
         
         if let file = URL.init(string: filePath) {
@@ -83,10 +83,19 @@ class FileViewerPlugin {
             
             if let viewController = rootViewController {
                 let fileViewerPreview = FileViewerPreview(viewController: viewController)
-                try fileViewerPreview.previewMediaContent(filePath: file)
+                try fileViewerPreview.previewMediaContent(url: file)
             }
         } else {
             throw FileViewerErrors.couldNotOpenDocument
+        }
+    }
+
+    func previewMediaContentFromUrl(url:String) throws {
+        guard url.isValidUrl() else { throw FileViewerErrors.invalidURL }
+        
+        if let fileUrl = URL(string: url), let viewController = rootViewController {
+            let fileViewerPreview = FileViewerPreview(viewController: viewController)
+            try fileViewerPreview.previewMediaContent(url: fileUrl)
         }
     }
     
