@@ -7,8 +7,13 @@
 
 import Foundation
 
+class FileResult {
+    var name:String?
+    var destinationUrl:URL?
+}
+
 typealias ErrorCompletionHandler = () throws -> FileViewerErrors
-typealias URLCompletionHandler = () throws -> URL
+typealias URLCompletionHandler = () throws -> FileResult
 
 class FileDownloader {
     
@@ -18,11 +23,15 @@ class FileDownloader {
         let fileExtension = url.pathExtension
         let fileName = url.deletingPathExtension().lastPathComponent
         let destinationUrl = documentsDirectoryURL
-            .appendingPathComponent(fileName)
+            .appendingPathComponent(fileName + UUID().uuidString)
             .appendingPathExtension(fileExtension)
     
+        let fileResult = FileResult()
+        fileResult.name = fileName + "." + url.pathExtension
+        fileResult.destinationUrl = destinationUrl
+        
         if FileManager.default.fileExists(atPath: destinationUrl.path) {
-            completion(true, { return destinationUrl })
+            completion(true, { return fileResult })
         } else {
             URLSession.shared.downloadTask(with: itemUrl, completionHandler: { (location, response, error) in
                 if let httpResponse = response as? HTTPURLResponse {
@@ -30,13 +39,15 @@ class FileDownloader {
                         guard let tempLocation = location, error == nil else { return }
                         do {
                             try FileManager.default.moveItem(at: tempLocation, to: destinationUrl)
-                            completion(true, { return destinationUrl } )
+                            completion(true, { return fileResult } )
                         } catch {
                             completion(false, { throw FileViewerErrors.downloadFailed })
                         }
                     } else {
                         completion(false, { throw FileViewerErrors.downloadFailed })
                     }
+                } else {
+                    completion(false, { throw FileViewerErrors.downloadFailed })
                 }
             }).resume()
         }

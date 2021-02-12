@@ -32,7 +32,9 @@ class FileViewerPreview {
             do {
                 let result = try inner()
                 DispatchQueue.main.async {
-                    self.previewItem = result.standardized as NSURL
+                    if let urlStr = result.destinationUrl?.standardized {
+                        self.previewItem = urlStr as NSURL
+                    }
                     let previewController = QLPreviewController()
                     previewController.dataSource = self
                     self.viewController?.present(previewController, animated: true, completion: nil)
