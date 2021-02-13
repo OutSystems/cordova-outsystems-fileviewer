@@ -35,6 +35,27 @@ public class OSOpenDocument {
         }
     }
 
+    public void openDocumentFromResources(Activity activity, String fileName, String ext) throws ActivityNotFoundException, FileNotFoundException {
+        String fileToBeOpened = fileName + "." + ext;
+        AssetManager assetManager = activity.getAssets();
+        String filePath = "file:///android_asset/www/resources/" + fileToBeOpened;
+        String mimeType = getMimeType(filePath);
+        File file = new File(filePath);
+
+        if(file.exists()){
+            Uri contentUri = Uri.parse("file:///android_asset/www/resources/" + fileToBeOpened);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(contentUri, mimeType);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            activity.startActivity(intent);
+        }
+        else{
+            throw new FileNotFoundException();
+        }
+    }
+
     public void openDocumentFromURL(Activity activity, String url) throws ActivityNotFoundException, MalformedURLException{
         if(isURLValid(url)){
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
