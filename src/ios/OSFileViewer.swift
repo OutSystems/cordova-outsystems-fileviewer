@@ -1,5 +1,5 @@
 //
-//  FileViewerPlugin.swift
+//  OSFileViewer.swift
 //  FileViewer
 //
 //  Created by Outsystems on 27/01/2021.
@@ -41,6 +41,18 @@ class OSFileViewer : CDVPlugin {
         }
     }
     
+    @objc(previewDocumentFromResources:)
+    func previewDocumentFromResources(command: CDVInvokedUrlCommand) {
+        callbackId = command.callbackId
+        let fileName = command.arguments[0] as? String ?? ""
+        let fileExtension = command.arguments[1] as? String ?? ""
+        do {
+            try plugin.previewDocumentFromResources(fileName: fileName, ext: fileExtension)
+        } catch {
+            sendResult(result: "", error: error.localizedDescription)
+        }
+    }
+    
     @objc(previewDocumentFromUrl:)
     func previewDocumentFromUrl(command: CDVInvokedUrlCommand) {
         callbackId = command.callbackId
@@ -65,6 +77,18 @@ class OSFileViewer : CDVPlugin {
         }
     }
     
+    @objc(openDocumentFromResources:)
+    func openDocumentFromResources(command: CDVInvokedUrlCommand) {
+        callbackId = command.callbackId
+        let fileName = command.arguments[0] as? String ?? ""
+        let fileExtension = command.arguments[1] as? String ?? ""
+        do {
+            try plugin.openDocumentFromResources(fileName: fileName, ext: fileExtension)
+        } catch {
+            sendResult(result: "", error: error.localizedDescription)
+        }
+    }
+    
     @objc(openDocumentFromUrl:)
     func openDocumentFromUrl(command: CDVInvokedUrlCommand) {
         callbackId = command.callbackId
@@ -84,6 +108,18 @@ class OSFileViewer : CDVPlugin {
         let filePath = command.arguments[0] as? String ?? ""
         do {
             try plugin.previewMediaContentFromLocalPath(filePath: filePath)
+        } catch {
+            sendResult(result: "", error: error.localizedDescription)
+        }
+    }
+    
+    @objc(previewMediaContentFromResources:)
+    func previewMediaContentFromResources(command: CDVInvokedUrlCommand) {
+        callbackId = command.callbackId
+        let fileName = command.arguments[0] as? String ?? ""
+        let fileExtension = command.arguments[1] as? String ?? ""
+        do {
+            try plugin.previewMediaContentFromResources(fileName: fileName, ext: fileExtension)
         } catch {
             sendResult(result: "", error: error.localizedDescription)
         }

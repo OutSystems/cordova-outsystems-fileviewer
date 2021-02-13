@@ -99,5 +99,38 @@ class FileViewerPlugin {
         }
     }
     
+    func openDocumentFromResources(fileName: String, ext: String) throws {
+        guard !fileName.isEmpty && !ext.isEmpty else { throw FileViewerErrors.emptyFileName }
+        guard let filePath = Bundle.main.path(forResource: fileName, ofType: ext, inDirectory: "www/resources") else { throw FileViewerErrors.fileDoesNotExist }
+            let url:URL = URL.init(fileURLWithPath: filePath)
+            guard FileManager.default.fileExists(atPath: url.path) else { throw FileViewerErrors.fileDoesNotExist }
+            if let viewController = rootViewController {
+                let fileViewerOpenDocument = FileViewerOpenDocument(viewController: viewController)
+                try fileViewerOpenDocument.openDocumentFromLocalPath(filePath: url)
+            }
+    }
+    
+    func previewDocumentFromResources(fileName: String, ext: String) throws {
+        guard !fileName.isEmpty && !ext.isEmpty else { throw FileViewerErrors.emptyFileName }
+        guard let filePath = Bundle.main.path(forResource: fileName, ofType: ext, inDirectory: "www/resources") else { throw FileViewerErrors.fileDoesNotExist }
+            let url:URL = URL.init(fileURLWithPath: filePath)
+            guard FileManager.default.fileExists(atPath: url.path) else { throw FileViewerErrors.fileDoesNotExist }
+            if let viewController = rootViewController {
+                let fileViewerPreview = FileViewerPreview(viewController: viewController)
+                try fileViewerPreview.previewDocumentFromLocalPath(filePath: url)
+            }
+    }
+    
+    func previewMediaContentFromResources(fileName: String, ext: String) throws {
+        guard !fileName.isEmpty && !ext.isEmpty else { throw FileViewerErrors.emptyFileName }
+        guard let filePath = Bundle.main.path(forResource: fileName, ofType: ext, inDirectory: "www/resources") else { throw FileViewerErrors.fileDoesNotExist }
+            let url:URL = URL.init(fileURLWithPath: filePath)
+            guard FileManager.default.fileExists(atPath: url.path) else { throw FileViewerErrors.fileDoesNotExist }
+            if let viewController = rootViewController {
+                let fileViewerPreview = FileViewerPreview(viewController: viewController)
+                try fileViewerPreview.previewMediaContent(url: url)
+            }
+    }
+    
 }
 
