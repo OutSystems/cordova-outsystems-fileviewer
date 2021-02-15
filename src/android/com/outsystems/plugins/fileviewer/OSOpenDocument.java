@@ -35,15 +35,13 @@ public class OSOpenDocument {
         }
     }
 
-    public void openDocumentFromResources(Activity activity, String fileName, String ext) throws ActivityNotFoundException, FileNotFoundException {
-        String fileToBeOpened = fileName + "." + ext;
+    public void openDocumentFromResources(Activity activity, String filePath) throws ActivityNotFoundException, FileNotFoundException {
         AssetManager assetManager = activity.getAssets();
-        String filePath = "file:///android_asset/www/resources/" + fileToBeOpened;
         String mimeType = getMimeType(filePath);
         File file = new File(filePath);
 
         if(file.exists()){
-            Uri contentUri = Uri.parse("file:///android_asset/www/resources/" + fileToBeOpened);
+            Uri contentUri = Uri.parse(filePath);
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(contentUri, mimeType);
             intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);

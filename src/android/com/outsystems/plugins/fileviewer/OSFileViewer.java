@@ -29,11 +29,14 @@ import java.util.ArrayList;
 public class OSFileViewer extends CordovaPlugin {
 
     private final static String KEY_ACTION_PREVIEW_DOCUMENT_FROM_FILE_PATH = "previewDocumentFromLocalPath";
+    private final static String KEY_ACTION_PREVIEW_DOCUMENT_FROM_RESOURCES = "previewDocumentFromResources";
     private final static String KEY_ACTION_PREVIEW_DOCUMENT_FROM_URL = "previewDocumentFromUrl";
     private final static String KEY_ACTION_OPEN_DOCUMENT_FROM_FILE_PATH = "openDocumentFromLocalPath";
+    private final static String KEY_ACTION_OPEN_DOCUMENT_FROM_RESOURCES = "openDocumentFromResources";
     private final static String KEY_ACTION_OPEN_DOCUMENT_FROM_URL = "openDocumentFromUrl";
     private final static String KEY_ACTION_PREVIEW_MEDIA_CONTENT_FILE_PATH = "previewMediaContentFromLocalPath";
     private final static String KEY_ACTION_PREVIEW_MEDIA_CONTENT_URL = "previewMediaContentFromUrl";
+    private final static String KEY_ACTION_PREVIEW_MEDIA_CONTENT_RESOURCES = "previewMediaContentFromResources";
     private final static String KEY_ACTION_OPEN_FILE_CHOOSER = "openFileChooser";
     private final static String KEY_ACTION_IS_VALID_URL = "isValidURL";
 
@@ -56,6 +59,10 @@ public class OSFileViewer extends CordovaPlugin {
             this.previewDocumentFromUrl(args, callbackContext);
             return true;
         }
+        else if (action.equals(KEY_ACTION_PREVIEW_DOCUMENT_FROM_RESOURCES)) {
+            this.previewDocumentFromResources(args, callbackContext);
+            return true;
+        }
         else if (action.equals(KEY_ACTION_OPEN_DOCUMENT_FROM_FILE_PATH)) {
             this.openDocumentFromLocalPath(args, callbackContext);
             return true;
@@ -64,12 +71,20 @@ public class OSFileViewer extends CordovaPlugin {
             this.openDocumentFromUrl(args, callbackContext);
             return true;
         }
+        else if (action.equals(KEY_ACTION_OPEN_DOCUMENT_FROM_RESOURCES)) {
+            this.openDocumentFromResources(args, callbackContext);
+            return true;
+        }
         else if (action.equals(KEY_ACTION_PREVIEW_MEDIA_CONTENT_FILE_PATH))  {
             this.openDocumentFromLocalPath(args, callbackContext);
             return true;
         }
         else if (action.equals(KEY_ACTION_PREVIEW_MEDIA_CONTENT_URL))  {
             this.openDocumentFromUrl(args, callbackContext);
+            return true;
+        }
+        else if (action.equals(KEY_ACTION_PREVIEW_MEDIA_CONTENT_RESOURCES))  {
+            this.previewMediaContentFromFromResources(args, callbackContext);
             return true;
         }
         else if (action.equals(KEY_ACTION_OPEN_FILE_CHOOSER)) {
@@ -88,6 +103,10 @@ public class OSFileViewer extends CordovaPlugin {
     }
 
     private void previewDocumentFromUrl(JSONArray args, CallbackContext callbackContext) {
+        //TODO
+    }
+
+    private void previewDocumentFromResources(JSONArray args, CallbackContext callbackContext) {
         //TODO
     }
 
@@ -110,6 +129,41 @@ public class OSFileViewer extends CordovaPlugin {
         if (OSOpenDocument.getInstance().isPathValid(filePath)) {
             try {
                 OSOpenDocument.getInstance().openDocumentFromLocalPath(this.cordova.getActivity(), filePath);
+                callbackContext.success();
+            } catch (ActivityNotFoundException e) {
+                callbackContext.error(buildErrorResponse(5, "There is no app to open this document"));
+            } catch (FileNotFoundException e) {
+                callbackContext.error(buildErrorResponse(6, "The file you are trying to open does not exist"));
+            }
+            return;
+        }
+
+        callbackContext.error(buildErrorResponse(2, "Path of the file to open is either null or empty"));
+    }
+
+    /**
+     * Method to open files from Resources (files added as resources in OutSystems Service Studio)
+     * @param args
+     * @param callbackContext
+     * @throws JSONException
+     */
+    private void openDocumentFromResources(JSONArray args, CallbackContext callbackContext) throws JSONException {
+        String fileName = null;
+        String fileExtension = null;
+        String filePath = null;
+        String mimeType = null;
+        try {
+            fileName = args.getString(0);
+            fileExtension = args.getString(1);
+            filePath = "file:///android_asset/www/resources/"+fileName+"."+fileExtension;
+        } catch (JSONException e) {
+            callbackContext.error(buildErrorResponse(1, "Invalid arguments"));
+            return;
+        }
+
+        if (OSOpenDocument.getInstance().isPathValid(filePath)) {
+            try {
+                OSOpenDocument.getInstance().openDocumentFromResources(this.cordova.getActivity(), filePath);
                 callbackContext.success();
             } catch (ActivityNotFoundException e) {
                 callbackContext.error(buildErrorResponse(5, "There is no app to open this document"));
@@ -152,6 +206,10 @@ public class OSFileViewer extends CordovaPlugin {
     }
 
     private void previewMediaContent(JSONArray args, CallbackContext callbackContext) {
+        //TODO
+    }
+
+    private void previewMediaContentFromFromResources(JSONArray args, CallbackContext callbackContext) {
         //TODO
     }
 
