@@ -35,19 +35,26 @@ public class OSOpenDocument {
         }
     }
 
-    public void openDocumentFromResources(Activity activity, String filePath) throws ActivityNotFoundException, FileNotFoundException {
-        AssetManager assetManager = activity.getAssets();
-        String mimeType = getMimeType(filePath);
-        File file = new File(filePath);
+    public void openDocumentFromResources(Activity activity, String fileName, String fileExtension) throws ActivityNotFoundException, FileNotFoundException {
+        Boolean fileFound = copyAssets(fileName + "." + fileExtension, activity);
+        if (fileFound == true) {
 
-        if(file.exists()){
-            Uri contentUri = Uri.parse(filePath);
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(contentUri, mimeType);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            String filePath = activity.getExternalCacheDir().getAbsolutePath() + "/" + fileName + "." + fileExtension;
 
-            activity.startActivity(intent);
+            String mimeType = getMimeType(filePath);
+            File file = new File(filePath);
+
+            if(file.exists()){
+                Uri contentUri = Uri.parse(filePath);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(contentUri, mimeType);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+                activity.startActivity(intent);
+            } else{
+                throw new FileNotFoundException();
+            }
         }
         else{
             throw new FileNotFoundException();
@@ -95,8 +102,74 @@ public class OSOpenDocument {
     //Singleton
     private static OSOpenDocument instance;
 
+    //Helper Functions
     static OSOpenDocument getInstance() {
         return instance == null ? (instance = new OSOpenDocument()) : instance;
+    }
+
+    private Boolean copyAssets(String fileToBeCopied, Activity activity){
+        Context context = activity.getApplicationContext();
+        AssetManager assetManager;
+        String[] files = null;
+
+        try {
+            assetManager = activity.getAssets();
+            files = assetManager.list("www/resources/");
+        } catch (IOException e) {
+            Log.e("tag", "Failed to get asset file list.", e);
+            String errorMessage = "Failed to copy resource file: " + fileToBeCopied + ". " + e;
+            return false;
+        }
+        Boolean fileFound = false;
+        if (files != null) for (String filename : files) {
+            if (filename.equals(fileToBeCopied)){
+                fileFound = true;
+                InputStream in = null;
+                OutputStream out = null;
+                try {
+                    in = assetManager.open("www/resources/" + filename);
+                    File outFile = new File(context.getExternalCacheDir(),filename);
+                    out = new FileOutputStream(outFile);
+                    copyFile(in, out);
+                } catch(IOException e) {
+                    Log.e("tag", "Failed to copy resource file: " + filename, e);
+                    String errorMessage = "Failed to copy resource file: " + filename + ". " + e;
+                    return false;
+                }
+                finally {
+                    if (in != null) {
+                        try {
+                            in.close();
+                        } catch (IOException e) {
+                            String errorMessage = "Failed to copy resource file: " + filename + ". " + e;
+                            return false;
+                        }
+                    }
+                    if (out != null) {
+                        try {
+                            out.close();
+                        } catch (IOException e) {
+                            String errorMessage = "Failed to copy resource file: " + filename + ". " + e;
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        if (fileFound){
+            return true;
+        } else {
+            //return "Failed to copy resource file: " + fileToBeCopied + ". File not found.";
+            return false;
+        }
+
+    }
+    private void copyFile(InputStream in, OutputStream out) throws IOException {
+        byte[] buffer = new byte[1024];
+        int read;
+        while((read = in.read(buffer)) != -1){
+            out.write(buffer, 0, read);
+        }
     }
 
 }
