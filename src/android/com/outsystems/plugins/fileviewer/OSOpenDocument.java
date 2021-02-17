@@ -121,7 +121,7 @@ public class OSOpenDocument {
             assetManager = activity.getAssets();
             files = assetManager.list("www/resources/");
         } catch (IOException e) {
-            Log.e("tag", "Failed to get asset file list.", e);
+            //Log.e("tag", "Failed to get asset file list.", e);
             String errorMessage = "Failed to copy resource file: " + fileToBeCopied + ". " + e;
             return false;
         }
@@ -137,8 +137,8 @@ public class OSOpenDocument {
                     out = new FileOutputStream(outFile);
                     copyFile(in, out);
                 } catch(IOException e) {
-                    Log.e("tag", "Failed to copy resource file: " + filename, e);
-                    String errorMessage = "Failed to copy resource file: " + filename + ". " + e;
+                    //Log.e("tag", "Failed to copy resource file: " + filename, e);
+                    //String errorMessage = "Failed to copy resource file: " + filename + ". " + e;
                     return false;
                 }
                 finally {
@@ -146,7 +146,7 @@ public class OSOpenDocument {
                         try {
                             in.close();
                         } catch (IOException e) {
-                            String errorMessage = "Failed to copy resource file: " + filename + ". " + e;
+                            //String errorMessage = "Failed to copy resource file: " + filename + ". " + e;
                             return false;
                         }
                     }
@@ -154,7 +154,7 @@ public class OSOpenDocument {
                         try {
                             out.close();
                         } catch (IOException e) {
-                            String errorMessage = "Failed to copy resource file: " + filename + ". " + e;
+                            //String errorMessage = "Failed to copy resource file: " + filename + ". " + e;
                             return false;
                         }
                     }
