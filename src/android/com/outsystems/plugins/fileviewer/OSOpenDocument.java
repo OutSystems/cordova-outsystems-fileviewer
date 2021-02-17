@@ -3,6 +3,7 @@ package com.outsystems.plugins.fileviewer;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.net.Uri;
 import android.webkit.MimeTypeMap;
 
