@@ -30,12 +30,6 @@
     <source-file src="src/android/com/outsystems/plugins/fileviewer/OSPreviewDocument.java" target-dir="src/com/outsystems/plugins/fileviewer"/>
     <source-file src="src/android/com/outsystems/plugins/fileviewer/OSGetMimeType.java" target-dir="src/com/outsystems/plugins/fileviewer"/>
     <source-file src="src/android/xml/file_viewer_paths.xml" target-dir="res/xml"/>
-    <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
-            <application android:requestLegacyExternalStorage="true" />
-        </edit-config>
-    <config-file target="AndroidManifest.xml" parent="/*">
-            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    </config-file>
   </platform>
   <platform name="ios">
     <config-file parent="/*" target="config.xml">
