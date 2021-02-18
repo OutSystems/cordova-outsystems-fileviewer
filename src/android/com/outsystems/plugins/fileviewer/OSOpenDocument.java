@@ -50,7 +50,8 @@ public class OSOpenDocument {
             File file = new File(filePath);
 
             if(file.exists()){
-                Uri contentUri = Uri.parse(filePath);
+                Uri contentUri = FileProvider.getUriForFile(activity.getApplicationContext(), activity.getPackageName() + ".opener.provider",file);
+                //Uri contentUri = Uri.parse(filePath);
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setDataAndType(contentUri, mimeType);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
