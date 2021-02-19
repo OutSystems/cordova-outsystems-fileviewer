@@ -122,7 +122,7 @@ public class OSOpenDocument {
 
         try {
             assetManager = activity.getAssets();
-            files = assetManager.list("www/resources/");
+            files = assetManager.list("www"+File.separator+"resources");
         } catch (IOException e) {
             //Log.e("tag", "Failed to get asset file list.", e);
             String errorMessage = "Failed to copy resource file: " + fileToBeCopied + ". " + e;
