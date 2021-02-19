@@ -2,14 +2,21 @@ package com.outsystems.plugins.fileviewer;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.net.Uri;
+import android.util.Log;
 import android.webkit.MimeTypeMap;
 
 import androidx.core.content.FileProvider;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,6 +36,32 @@ public class OSOpenDocument {
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
             activity.startActivity(intent);
+        }
+        else{
+            throw new FileNotFoundException();
+        }
+    }
+
+    public void openDocumentFromResources(Activity activity, String fileName, String fileExtension) throws ActivityNotFoundException, FileNotFoundException {
+        Boolean fileFound = copyAssets(fileName + "." + fileExtension, activity);
+        if (fileFound == true) {
+
+            String filePath = activity.getExternalCacheDir().getAbsolutePath() + "/" + fileName + "." + fileExtension;
+
+            String mimeType = getMimeType(filePath);
+            File file = new File(filePath);
+
+            if(file.exists()){
+                Uri contentUri = FileProvider.getUriForFile(activity.getApplicationContext(), activity.getPackageName() + ".opener.provider",file);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(contentUri, mimeType);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+                activity.startActivity(intent);
+            } else{
+                throw new FileNotFoundException();
+            }
         }
         else{
             throw new FileNotFoundException();
@@ -76,8 +109,68 @@ public class OSOpenDocument {
     //Singleton
     private static OSOpenDocument instance;
 
+    //Helper Functions
     static OSOpenDocument getInstance() {
         return instance == null ? (instance = new OSOpenDocument()) : instance;
+    }
+
+    private Boolean copyAssets(String fileToBeCopied, Activity activity){
+        Context context = activity.getApplicationContext();
+        AssetManager assetManager;
+        String[] files = null;
+
+        try {
+            assetManager = activity.getAssets();
+            files = assetManager.list("www"+File.separator+"resources");
+        } catch (IOException e) {
+            String errorMessage = "Failed to copy resource file: " + fileToBeCopied + ". " + e;
+            return false;
+        }
+        Boolean fileFound = false;
+        if (files != null) for (String filename : files) {
+            if (filename.equals(fileToBeCopied)){
+                fileFound = true;
+                InputStream in = null;
+                OutputStream out = null;
+                try {
+                    in = assetManager.open("www/resources/" + filename);
+                    File outFile = new File(context.getExternalCacheDir(),filename);
+                    out = new FileOutputStream(outFile);
+                    copyFile(in, out);
+                } catch(IOException e) {
+                    return false;
+                }
+                finally {
+                    if (in != null) {
+                        try {
+                            in.close();
+                        } catch (IOException e) {
+                            return false;
+                        }
+                    }
+                    if (out != null) {
+                        try {
+                            out.close();
+                        } catch (IOException e) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        if (fileFound){
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+    private void copyFile(InputStream in, OutputStream out) throws IOException {
+        byte[] buffer = new byte[1024];
+        int read;
+        while((read = in.read(buffer)) != -1){
+            out.write(buffer, 0, read);
+        }
     }
 
 }
