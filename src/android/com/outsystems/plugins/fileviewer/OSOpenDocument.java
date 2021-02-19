@@ -53,7 +53,6 @@ public class OSOpenDocument {
 
             if(file.exists()){
                 Uri contentUri = FileProvider.getUriForFile(activity.getApplicationContext(), activity.getPackageName() + ".opener.provider",file);
-                //Uri contentUri = Uri.parse(filePath);
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setDataAndType(contentUri, mimeType);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
@@ -124,7 +123,6 @@ public class OSOpenDocument {
             assetManager = activity.getAssets();
             files = assetManager.list("www"+File.separator+"resources");
         } catch (IOException e) {
-            //Log.e("tag", "Failed to get asset file list.", e);
             String errorMessage = "Failed to copy resource file: " + fileToBeCopied + ". " + e;
             return false;
         }
@@ -140,8 +138,6 @@ public class OSOpenDocument {
                     out = new FileOutputStream(outFile);
                     copyFile(in, out);
                 } catch(IOException e) {
-                    //Log.e("tag", "Failed to copy resource file: " + filename, e);
-                    //String errorMessage = "Failed to copy resource file: " + filename + ". " + e;
                     return false;
                 }
                 finally {
@@ -149,7 +145,6 @@ public class OSOpenDocument {
                         try {
                             in.close();
                         } catch (IOException e) {
-                            //String errorMessage = "Failed to copy resource file: " + filename + ". " + e;
                             return false;
                         }
                     }
@@ -157,7 +152,6 @@ public class OSOpenDocument {
                         try {
                             out.close();
                         } catch (IOException e) {
-                            //String errorMessage = "Failed to copy resource file: " + filename + ". " + e;
                             return false;
                         }
                     }
@@ -167,7 +161,6 @@ public class OSOpenDocument {
         if (fileFound){
             return true;
         } else {
-            //return "Failed to copy resource file: " + fileToBeCopied + ". File not found.";
             return false;
         }
 
