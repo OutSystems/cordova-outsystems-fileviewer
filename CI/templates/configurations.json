@@ -1,0 +1,17 @@
+{
+    "moduleName": "OSFileViewerPlugin",
+    "applicationNames": [
+        "OSFileViewerPlugin",
+        "OSFileViewerSampleApp"
+    ],
+    "testPipelineArgs": {
+        "plugin": "<--- Insert plugin name as it is in UI Test pipeline Variable --->",
+        "threads": "3"
+    },
+    "sauceLabsInfo": {
+        "OSFileViewerSampleApp": {
+            "androidAPIKey": "<--- Insert android sauce labs key here --->",
+            "iosAPIKey": "<--- Insert ios sauce labs key here --->"
+        }
+    }
+}
