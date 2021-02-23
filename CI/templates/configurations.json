@@ -1,0 +1,17 @@
+{
+    "moduleName": "FileViewerPlugin",
+    "applicationNames": [
+        "FileViewerPlugin",
+        "FileSampleApp"
+    ],
+    "testPipelineArgs": {
+        "plugin": "file-viewer",
+        "threads": "3"
+    },
+    "sauceLabsInfo": {
+        "FileSampleApp": {
+            "androidAPIKey": "9C8EFA434E3F4217A840980657050FC2",
+            "iosAPIKey": "1CE65F62EE68489FA8542216D0C84070"
+        }
+    }
+}
