@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## 2021-02-22
+- Removed unnecessary example unit test file for Android tests.
+
 ## 2021-02-19
 - Added implementation for open document in Local Resources (iOS & Android) [RMET-441](https://outsystemsrd.atlassian.net/browse/RMET-441)
 
