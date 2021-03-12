@@ -1,6 +1,8 @@
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+var configurations = require('./configurations.json');
+var fs = require("fs");
+var http = require('https');
 
-if(process.env.npm_package_config_applicationNames == null) {
+if(configurations.applicationNames == null) {
     throw new Error("Missing applicationNames array configuration in package.json");
 }
 
@@ -20,9 +22,11 @@ if(process.env.npm_config_destinationFolder == null) {
     throw new Error("The destination folder path for the ipa/apks not set \"destinationFolder\"");
 }
 
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+
 var fromEnvironment = process.env.npm_config_fromEnvironment;
 var toEnvironment = process.env.npm_config_toEnvironment;
-var applicationNames = process.env.npm_package_config_applicationNames;
+var applicationNames = configurations.applicationNames;
 var basicAuthentication = process.env.npm_config_authentication;
 var baseURL = process.env.npm_config_pipelineSupportURL;
 var downloadDestinationFolder = process.env.npm_config_destinationFolder;
@@ -35,7 +39,7 @@ var lastLog = {"Instant":"", "Message": ""};
 var buildProgress = {};
 var checkResponse = null;
 
-while(checkCondition(deploymentStatus)) {
+while(checkCondition(pipelineStatus)) {
 	console.log("Checking Status");
 	checkResponse = checkStatus(baseURL, deploymentKey, basicAuthentication);
 	var newStatus = checkResponse.Status;
@@ -47,19 +51,25 @@ while(checkCondition(deploymentStatus)) {
 	}
 
 	if(pipelineStatus=="StartedDeployment" || pipelineStatus=="Success") {
-		if(process.env.npm_config_verbose == null) {
-			var newLastLog = checkResponse.DeploymentLog[checkResponse.DeploymentLog.length - 1];
-			if(lastLog.Instant != newLastLog.Instant) {
-				lastLog = newLastLog;
-				console.log("Deployment log message date: " + lastLog.Instant + "|| Message: " + lastLog.Message);
+		if(checkResponse.DeploymentResponse.DeploymentLog != null) {
+			if(process.env.npm_config_verbose != null) {
+				var newLastLog = checkResponse.DeploymentResponse.DeploymentLog[checkResponse.DeploymentLog.length - 1];
+				if(lastLog.Instant != newLastLog.Instant) {
+					lastLog = newLastLog;
+					console.log("Deployment log message date: " + lastLog.Instant + "|| Message: " + lastLog.Message);
+				}
+			} else {
+				checkResponse.DeploymentResponse.DeploymentLog.forEach( (element) => printBuilding(element) );
 			}
-		} else {
-			checkResponse.DeploymentLog.forEach( (element) => printBuilding(element) );
 		}
 	}
 
 	if(pipelineStatus=="StartedBuilding" || pipelineStatus=="Success") {
-		checkResponse.BuildingResponse.ApplicationPlatform.forEach( (element) => console.log("Date: " + element.Instant + "|| Message: " + element.Message) );
+		checkResponse.BuildingResponse.ApplicationPlatform.forEach( (aux) => {
+			aux.PlatformProgress.forEach( (element) => {
+				console.log(aux.Name + " " + element.Name + ": " + element.Progress);
+			});
+		});
 	}
 
 	if(pipelineStatus=="Fail") {
@@ -76,14 +86,18 @@ var androidPath = checkResponse.SuccessResponse.androidPath;
 
 console.log("Starting download of apps");
 
-checkResponse.SuccessResponse.SuccessResponse.downloadableApplications.forEach(function(element) {
+checkResponse.SuccessResponse.downloadableApplications.forEach(function(element) {
 	var iosURL = downloadsBaseURL + iosPath + "?appKey=" + element.appKey;
 	var androidURL = downloadsBaseURL + androidPath + "?appKey=" + element.appKey;
 
+	if (!fs.existsSync(downloadDestinationFolder)){
+		console.log("Create build folder: " + downloadDestinationFolder);
+		fs.mkdirSync(downloadDestinationFolder);
+	}
 	console.log("Apps will be available in: " + downloadDestinationFolder);
 	console.log("Started download of ios app for " + element.appName);
 	
-	download(iosURL, downloadDestinationFolder + element.appName, "ios-app.ipa", function(error) {
+	download(iosURL, downloadDestinationFolder + element.appName, "/ios-app.ipa", function(error) {
 		if(error == null) {
 			console.log("Download success for ios platform of app " + element.appName);
 		} else {
@@ -92,7 +106,7 @@ checkResponse.SuccessResponse.SuccessResponse.downloadableApplications.forEach(f
 	});
 
 	console.log("Started download of android app for " + element.appName);
-	download(androidURL, downloadDestinationFolder + element.appName, "android-app.apk", function(error) {
+	download(androidURL, downloadDestinationFolder + element.appName, "/android-app.apk", function(error) {
 		if(error == null) {
 			console.log("Download success for android platform of app " + element.appName);
 		} else {
@@ -139,11 +153,11 @@ function checkStatus(base, deployKey, basicAuth) {
 	request.send();
 
 	if(request.status == 200) {
+		console.log("Status response: " + request.responseText)
 	    return JSON.parse(request.responseText);
 	} else {
 	    console.log("Network Error:", request);
 	    console.log("Network Error:", request.statusText);
-	    throw new Error("Message: " + request.responseText);
 	}
 }
 
@@ -160,20 +174,29 @@ function sleep(milliseconds) {
   } while (currentDate - date < milliseconds);
 }
 
-var download = function(url, dest, filename, cb) {
+function download(url, dest, filename, cb) {
+	if (!fs.existsSync(dest)){
+		console.log("Create build folder: " + dest);
+		fs.mkdirSync(dest);
+	}
+	console.log("Starting Stream");
 	var file = fs.createWriteStream(dest + filename);
 	var options = {
 		headers: {
-			"Authorization": basicAuth
-		}
+			"Authorization": basicAuthentication
+		},
+		timeout: 780000
 	};
 	var request = http.request(url, options, function(response) {
-	  response.pipe(file);
-	  file.on('finish', function() {
-		file.close(cb);
-	  });
+		  response.pipe(file);
 	}).on('error', function(err) {
-	  fs.unlink(dest + filename); 
-	  if (cb) cb(err.message);
+		if (err) {
+			fs.unlink(dest + filename, (fileError) => {
+				console.log(fileError);
+			});
+			console.log(err);
+			cb(err);
+		}
 	});
+	request.end();
   };

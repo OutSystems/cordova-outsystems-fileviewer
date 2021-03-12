@@ -8,13 +8,15 @@
 variables: 
 - group: outsystemsPluginsCIAuthentication
 - group: pipelineSupportOapURL
-- group: Saucelabs User Variables
+- group: sauceLabsUserVariables
 - name: basicAuth
   value: $[variables.basicAuthentication]
 - name: pipelineURL
   value: $[variables.productionEnvironmentURL]
 - name: sauceLabsUser
   value: $[variables.USER]
+- name: destinationFolder
+  value: $(System.DefaultWorkingDirectory)/builds/
 
 name: 'Release'
 
@@ -38,9 +40,7 @@ stages:
       toEnvironment: 'Testing'
       basicAuthentication: $(basicAuth)
       pipelineURL: $(pipelineURL)
-  - template: 'templates/artifact-apps-stage.yml'
-    parameters:
-      runID: $(BuildID)
-  -template: 'templates/upload-sauce-labs-stage.yml'
-    parameters:
+      destinationFolder: $(destinationFolder)
+      runID: $(Build.BuildID)
       sauceLabsUser: $(sauceLabsUser)
+  - template: 'templates/pipeline-run-stage.yml'

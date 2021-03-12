@@ -1,6 +1,6 @@
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+var configurations = require('./configurations.json');
 
-if(process.env.npm_package_config_moduleName == null) {
+if(configurations.moduleName == null) {
     throw new Error("Missing moduleName configuration in package.json");
 }
 
@@ -18,10 +18,12 @@ if(extensibilityChangeJson == null) {
     throw new Error("Missing extensibilityConfiguration.json file");
 }
 
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+
 var repository = process.env.npm_config_repositoryURL;
 var branch = process.env.npm_config_branch;
 var environment = process.env.npm_config_environment;
-var moduleName = process.env.npm_package_config_moduleName;
+var moduleName = configurations.moduleName ;
 var basicAuthentication = process.env.npm_config_authentication;
 
 var url = "https://" + environment + "/CodeUpdater/rest/Bulk/ExtensabilityUpdate";

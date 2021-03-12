@@ -8,10 +8,19 @@ parameters:
   default: ''
 - name: basicAuthentication
   type: string
-  default: null
+  default: ''
 - name: pipelineURL
   type: string
-  default: null
+  default: ''
+- name: destinationFolder
+  type: string
+  default: ''
+- name: runID
+  type: string
+  default: ''
+- name: sauceLabsUser
+  type: string
+  default: ''
 
 
 stages:
@@ -25,5 +34,12 @@ stages:
           - template: 'npm-steps.yml'
             parameters:
               workingDirectory: 'CI/templates'
-          - script: 'npm deploy --pipelineSupportURL="${{ parameters.pipelineURL }}" --fromEnvironment=${{ parameters.fromEnvironment }} --toEnvironment=${{ parameters.toEnvironment }} --destinationFolder="$(System.DefaultWorkingDirectory)/builds/" --authentication="${{ parameters.basicAuthentication }}"'
+          - script: 'npm run deploy --fromEnvironment=${{ parameters.fromEnvironment }} --toEnvironment=${{ parameters.toEnvironment }} --destinationFolder="${{ parameters.destinationFolder }}" --authentication="${{ parameters.basicAuthentication }}" --pipelineSupportURL="${{ parameters.pipelineURL }}"'
             workingDirectory: 'CI/templates'
+          - template: 'artifact-apps-step.yml'
+            parameters:
+              runID: ${{ parameters.runID }}
+          - template: 'upload-sauce-labs-stage.yml'
+            parameters:
+              sauceLabsUser: ${{ parameters.sauceLabsUser }}
+              destinationFolder: "${{ parameters.destinationFolder }}" 
