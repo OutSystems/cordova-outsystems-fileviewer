@@ -128,7 +128,8 @@ public class OSFileViewer extends CordovaPlugin {
 
         if (OSOpenDocument.getInstance().isPathValid(filePath)) {
             try {
-                OSOpenDocument.getInstance().openDocumentFromLocalPath(this.cordova.getActivity(), filePath);
+                String filePathNoSpaces = filePath.replaceAll("%20", " ");
+                OSOpenDocument.getInstance().openDocumentFromLocalPath(this.cordova.getActivity(), filePathNoSpaces);
                 callbackContext.success();
             } catch (ActivityNotFoundException e) {
                 callbackContext.error(buildErrorResponse(5, "There is no app to open this document"));
