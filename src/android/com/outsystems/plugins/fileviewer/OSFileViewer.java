@@ -128,7 +128,7 @@ public class OSFileViewer extends CordovaPlugin {
 
         if (OSOpenDocument.getInstance().isPathValid(filePath)) {
             try {
-                String filePathNoSpaces = filePath.replaceAll("%20", " ");
+                String filePathNoSpaces = filePath.replaceAll("%20", "\\ ").replaceAll(" ", "\\ ");
                 OSOpenDocument.getInstance().openDocumentFromLocalPath(this.cordova.getActivity(), filePathNoSpaces);
                 callbackContext.success();
             } catch (ActivityNotFoundException e) {
