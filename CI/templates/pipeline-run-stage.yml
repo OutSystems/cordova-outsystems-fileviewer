@@ -15,7 +15,7 @@ stages:
           - template: 'npm-steps.yml'
             parameters:
               workingDirectory: 'CI/templates'
-          - script: 'npm run startPipeline --jsonStringBase64="$(sauceLabsJsonString)" --token="$(personalToken)" --deviceAndroid=$(deviceAndroid)  --deviceIos=$(deviceIos) --androidPipelineID=$(androidPipelineID) --iosPipelineID=$(iosPipelineID) --azureProjectID=$(azureProjectID) --dataCenter=$(dataCenter)'
+          - script: 'npm run startPipeline --jsonStringBase64="$(sauceLabsJsonString)" --token="$(personalToken)" --deviceAndroid=$(deviceAndroid)  --deviceIos=$(deviceIos) --pipelineID=$(pipelineId) --azureProjectID=$(azureProjectID) --dataCenter=$(dataCenter)'
             timeoutInMinutes: 120
             workingDirectory: 'CI/templates'
             failOnStderr: true

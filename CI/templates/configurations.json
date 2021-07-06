@@ -4,6 +4,9 @@
         "FileViewerPlugin",
         "FileSampleApp"
     ],
+    "lifetimeVersion": {
+        "applicationName": "FileViewerPlugin"
+    },
     "testPipelineArgs": {
         "plugin": "file-viewer",
         "threads": "3"
