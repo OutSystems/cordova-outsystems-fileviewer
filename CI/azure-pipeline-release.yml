@@ -34,6 +34,7 @@ stages:
     parameters:
       environment: 'enmobile11-dev.outsystemsenterprise.com'
       basicAuthentication: $(basicAuth)
+      versionLifeTimeEnvironment: 'Development'
   - template: 'templates/deployment-build-stage.yml'
     parameters:
       fromEnvironment: 'Development'

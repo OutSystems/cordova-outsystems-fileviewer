@@ -18,13 +18,10 @@ if(process.env.npm_config_deviceIos == null) {
     throw new Error("Missing iOS version to use");
 }
 
-if(process.env.npm_config_androidPipelineID == null) {
+if(process.env.npm_config_pipelineID == null) {
     throw new Error("Missing Android Pipeline ID");
 }
 
-if(process.env.npm_config_iosPipelineID == null) {
-    throw new Error("Missing iOS Pipeline ID");
-}
 
 if(process.env.npm_config_azureProjectID == null) {
     throw new Error("Missing azure project ID");
@@ -42,7 +39,7 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function executePipeline(appID, plugin, platformVersion, azureProject, pipelineId, token, dataCenter, threads) {
+async function executePipeline(androidAppID, iosAppID, plugin, androidVersion, iosVersion, azureProject, pipelineId, token, center, thrds, skipiOS, skipAndroid) {
     const FAILED = 8;
     const orgUrl = 'https://dev.azure.com/OutSystemsRD'
     const authHandler = azdev.getPersonalAccessTokenHandler(token);
@@ -51,16 +48,20 @@ async function executePipeline(appID, plugin, platformVersion, azureProject, pip
     const testApi = await connection.getTestApi();
     const build = {
         templateParameters: {
-            "APP_ID": appID,
-            "DATACENTER": dataCenter,
-            "DEVICE_VERSION": platformVersion,
+            "ANDROID_APP_ID": androidAppID,
+            "IOS_APP_ID": iosAppID,
+            "ANDROID_DEVICE_VERSION": androidVersion,
+            "IOS_DEVICE_VERSION": iosVersion,
+            "DATACENTER": center,
             "MABS": "latest",
             "PLUGIN_NAME": plugin,
             "RETRY": "1",
             "TAGS": " ",
             "TEST_TYPE": "native",
-            "THREADS": threads,
+            "THREADS": thrds,
             "TYPE_OF_DEVICE": "real",
+            "skipAndroid": skipAndroid,
+            "skipIOS": skipiOS
         },
     };
     const url = `${orgUrl}/${azureProject}/_apis/pipelines/${pipelineId}/runs`;
@@ -78,12 +79,23 @@ async function executePipeline(appID, plugin, platformVersion, azureProject, pip
     }
     triggeredBuild = await buildApi.getBuild(azureProject, id);
     const buildReport = await buildApi.getBuildReport(azureProject, id);
-    console.log(`Tests finished: ${triggeredBuild.result == FAILED ? 'failed' : 'passed'}`);
-    const buildResults = await testApi.getTestResultsByBuild(azureProject, id);
-    const runResults = await testApi.getTestResults(azureProject, buildResults[0].runId);
-    console.log(`Passed tests: ${runResults.filter((test) => test.outcome == "Passed").map((test) => `\n${test.testCase.name}` )}\n`);
-    console.log(`Failed tests with bugs: ${runResults.filter((test) => test.outcome != "Passed" && !test.stackTrace.includes('**Unstable**')).map((test) => `${test.testCase.name}\n` )}\n`);
-    console.log(`Failed tests without bugs: ${runResults.filter((test) => test.outcome != "Passed" && test.stackTrace.includes('**Unstable**')).map((test) => `${test.testCase.name}\n` )}\n`);
+    if (triggeredBuild.result == FAILED) {
+        var pipelineError = pipelineError 
+            + `Tests finish on pipeline ${triggeredBuild._links.web.href}\n`
+            + "Tests Failed"
+            + `Passed tests: ${runResults.filter((test) => test.outcome == "Passed").map((test) => `\n${test.testCase.name}` )}\n`
+            + `Failed tests with bugs: ${runResults.filter((test) => test.outcome != "Passed" && !test.stackTrace.includes('**Unstable**')).map((test) => `${test.testCase.name}\n` )}\n`
+            + `Failed tests without bugs: ${runResults.filter((test) => test.outcome != "Passed" && test.stackTrace.includes('**Unstable**')).map((test) => `${test.testCase.name}\n` )}\n`
+            + "\n\n"
+        throw new Error(pipelineError)
+    } else {
+        console.log(`Tests finished: ${triggeredBuild.result == FAILED ? 'failed' : 'passed'}`);
+        const buildResults = await testApi.getTestResultsByBuild(azureProject, id);
+        const runResults = await testApi.getTestResults(azureProject, buildResults[0].runId);
+        console.log(`Passed tests: ${runResults.filter((test) => test.outcome == "Passed").map((test) => `\n${test.testCase.name}` )}\n`);
+        console.log(`Failed tests with bugs: ${runResults.filter((test) => test.outcome != "Passed" && !test.stackTrace.includes('**Unstable**')).map((test) => `${test.testCase.name}\n` )}\n`);
+        console.log(`Failed tests without bugs: ${runResults.filter((test) => test.outcome != "Passed" && test.stackTrace.includes('**Unstable**')).map((test) => `${test.testCase.name}\n` )}\n`);
+    }
 }
 
 var personalToken = process.env.npm_config_token;
@@ -92,11 +104,23 @@ var testPipelineArgs = configurations.testPipelineArgs;
 var azureProjectID = process.env.npm_config_azureProjectID;
 var dataCenter = process.env.npm_config_dataCenter;
 var threads = testPipelineArgs.threads;
+var pipelineID = process.env.npm_config_pipelineID;
 var jsonString = atob(jsonStringBase64);
 var json = JSON.parse(jsonString);
+var androidAppId = null;
+var iosAppId = null;
+var androidDeviceVersion = process.env.npm_config_deviceAndroid;
+var iosDeviceVersion = process.env.npm_config_deviceIos;
 
 json.forEach(function(run) {
-    var pipelineID = run.platform == 'android' ? process.env.npm_config_androidPipelineID : process.env.npm_config_iosPipelineID;
-    var deviceVersion = run.platform == 'android' ? process.env.npm_config_deviceAndroid : process.env.npm_config_deviceIos;
-    executePipeline(run.appID, testPipelineArgs.plugin, deviceVersion, azureProjectID, pipelineID, personalToken, dataCenter, threads);
+    if (run.platform == 'android') {
+        androidAppId = run.appID;
+    } else {
+        iosAppId = run.appID;
+    }
 });
+
+var androidSkip = (androidAppId == null);
+var iosSkip = (iosAppId == null);
+
+executePipeline(androidAppId, iosAppId, testPipelineArgs.plugin, androidDeviceVersion, iosDeviceVersion, azureProjectID, pipelineID, personalToken, dataCenter, threads, androidSkip, iosSkip);
