@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## 2021-07-13
+- Migrating package upload to newer Saucelabs API [RMET-761](https://outsystemsrd.atlassian.net/browse/RMET-761)
 ## 2021-07-06
 - Fix: files names with white spaces were not being opened. [RMET-740](https://outsystemsrd.atlassian.net/browse/RMET-740)
 ## 2021-02-22
