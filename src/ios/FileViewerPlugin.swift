@@ -14,18 +14,25 @@ class FileViewerPlugin {
     var fileViewerOpenDocument: FileViewerOpenDocument?
     var rootViewController:UIViewController?
     
-    func openDocumentFromLocalPath(filePath:String) throws {
+    
+    func openDocumentFromLocalPath(filePath:String, completion: @escaping (() -> Void )) throws {
         guard !filePath.isEmpty else { throw FileViewerErrors.invalidEmptyURL }
         
-        if let file = URL.init(string: filePath) {
-            guard FileManager.default.fileExists(atPath: file.path) else { throw FileViewerErrors.fileDoesNotExist }
-            
-            if let viewController = rootViewController {
-                let fileViewerOpenDocument = FileViewerOpenDocument(viewController: viewController)
-                try fileViewerOpenDocument.openDocumentFromLocalPath(filePath: file)
+        let urlString = filePath.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
+        if let url = urlString {
+            if let file = URL.init(string: url) {
+                guard FileManager.default.fileExists(atPath: file.path) else { throw FileViewerErrors.fileDoesNotExist }
+                
+                if let viewController = rootViewController {
+                    let fileViewerOpenDocument = FileViewerOpenDocument(viewController: viewController)
+                    try fileViewerOpenDocument.openDocumentFromLocalPath(filePath: file) {
+                        completion()
+                    }
+                }
             }
         }
-
+        
     }
     
     func openDocumentFromUrl(url:String, completion: @escaping (_ inner: ErrorCompletionHandler) -> Void) {
@@ -99,14 +106,16 @@ class FileViewerPlugin {
         }
     }
     
-    func openDocumentFromResources(fileName: String, ext: String) throws {
+    func openDocumentFromResources(fileName: String, ext: String, completion: @escaping (() -> Void )) throws {
         guard !fileName.isEmpty && !ext.isEmpty else { throw FileViewerErrors.emptyFileName }
         guard let filePath = Bundle.main.path(forResource: fileName, ofType: ext, inDirectory: "www/resources") else { throw FileViewerErrors.fileDoesNotExist }
             let url:URL = URL.init(fileURLWithPath: filePath)
             guard FileManager.default.fileExists(atPath: url.path) else { throw FileViewerErrors.fileDoesNotExist }
             if let viewController = rootViewController {
                 let fileViewerOpenDocument = FileViewerOpenDocument(viewController: viewController)
-                try fileViewerOpenDocument.openDocumentFromLocalPath(filePath: url)
+                try fileViewerOpenDocument.openDocumentFromLocalPath(filePath: url) {
+                    completion()
+                }
             }
     }
     

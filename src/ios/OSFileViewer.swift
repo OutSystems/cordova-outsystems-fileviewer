@@ -71,10 +71,14 @@ class OSFileViewer : CDVPlugin {
         callbackId = command.callbackId
         let filePath = command.arguments[0] as? String ?? ""
         do {
-            try plugin.openDocumentFromLocalPath(filePath: filePath)
+            try plugin.openDocumentFromLocalPath(filePath: filePath, completion: sendResultOK)
         } catch {
             sendResult(result: "", error: error.localizedDescription)
         }
+    }
+    
+    func sendResultOK() {
+        sendResult(result: "", error: "")
     }
     
     @objc(openDocumentFromResources:)
@@ -83,7 +87,7 @@ class OSFileViewer : CDVPlugin {
         let fileName = command.arguments[0] as? String ?? ""
         let fileExtension = command.arguments[1] as? String ?? ""
         do {
-            try plugin.openDocumentFromResources(fileName: fileName, ext: fileExtension)
+            try plugin.openDocumentFromResources(fileName: fileName, ext: fileExtension, completion: sendResultOK)
         } catch {
             sendResult(result: "", error: error.localizedDescription)
         }
