@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## 2021-07-30
+- Fix: Implemented a completion handler to indentify when the preview document is dismissed. [RMET-740](https://outsystemsrd.atlassian.net/browse/RMET-912)
 ## 2021-07-13
 - Migrating package upload to newer Saucelabs API [RMET-761](https://outsystemsrd.atlassian.net/browse/RMET-761)
 ## 2021-07-06

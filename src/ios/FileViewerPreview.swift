@@ -13,6 +13,7 @@ class FileViewerPreview {
     
     lazy var previewItem = NSURL()
     weak var viewController: UIViewController?
+    var presentationFinished: (() -> Void)?
     
     init(viewController: UIViewController) {
         self.viewController = viewController

@@ -13,7 +13,7 @@ class OSFileViewerOpenDocumentTests: XCTestCase {
     func test_When_emptyUrlPassed_Expect_invalidEmptyURL() throws {
         let fileViewerPlugin = FileViewerPlugin()
         do {
-            try fileViewerPlugin.openDocumentFromLocalPath(filePath: "")
+            try fileViewerPlugin.openDocumentFromLocalPath(filePath: "") {}
             XCTFail("Did not throw error")
         } catch {
             XCTAssertEqual(error as? FileViewerErrors, .invalidEmptyURL)
@@ -23,7 +23,7 @@ class OSFileViewerOpenDocumentTests: XCTestCase {
     func test_When_invalidPathPassed_Expect_fileDoesNotExist() throws {
         let fileViewerPlugin = FileViewerPlugin()
         do {
-            try fileViewerPlugin.openDocumentFromLocalPath(filePath: "aaaaaaaaaaaaaa")
+            try fileViewerPlugin.openDocumentFromLocalPath(filePath: "aaaaaaaaaaaaaa") {}
             XCTFail("Did not throw error")
         } catch {
             XCTAssertEqual(error as? FileViewerErrors, .fileDoesNotExist)

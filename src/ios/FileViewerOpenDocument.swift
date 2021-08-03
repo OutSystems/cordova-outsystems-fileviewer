@@ -36,8 +36,10 @@ class FileViewerOpenDocument: NSObject {
         })
     }
     
-    func openDocumentFromLocalPath(filePath:URL) throws {
-        self.documentInteractionController = UIDocumentInteractionController.init()
+    func openDocumentFromLocalPath(filePath:URL, completion: @escaping () -> Void) throws {
+        self.documentInteractionController = DocumentInteractor() {
+            completion()
+        }
         self.documentInteractionController?.delegate = self
         self.documentInteractionController?.url = filePath.standardized
         self.documentInteractionController?.presentPreview(animated: true)
@@ -50,10 +52,26 @@ extension FileViewerOpenDocument: UIDocumentInteractionControllerDelegate {
     func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
         return self.viewController!
     }
+    
 }
 
 extension URL {
     var uti: String {
         return (try? self.resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier ?? "public.data"
     }
+}
+
+
+class DocumentInteractor: UIDocumentInteractionController {
+
+    var previewFinished: (() -> Void)
+    
+    init(presentationFinished: @escaping () -> Void) {
+        self.previewFinished = presentationFinished
+    }
+    
+    deinit {
+        self.previewFinished()
+    }
+    
 }
