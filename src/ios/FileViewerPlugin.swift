@@ -22,6 +22,10 @@ class FileViewerPlugin {
         
         if let url = urlString {
             if let file = URL.init(string: url) {
+
+                let fileName = file.lastPathComponent
+                guard fileName.contains(".") else { throw FileViewerErrors.missingFileExtension }
+                
                 guard FileManager.default.fileExists(atPath: file.path) else { throw FileViewerErrors.fileDoesNotExist }
                 
                 if let viewController = rootViewController {
@@ -40,7 +44,7 @@ class FileViewerPlugin {
             return completion({ throw FileViewerErrors.invalidURL })
         }
         
-        if let fileUrl = URL(string: url), let viewController = rootViewController {
+        if let fileUrl = URL(string: url.replacingOccurrences(of: " ", with: "%20")), let viewController = rootViewController {
             let fileViewerOpenDocument = FileViewerOpenDocument(viewController: viewController)
             fileViewerOpenDocument.openDocumentFromUrl(url:fileUrl, completion: { (inner: ErrorCompletionHandler) -> Void in
                 do {
