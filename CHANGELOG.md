@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [Version 1.0.4]
+
+## 2022-03-30
+- Fix: OpenDocument by FilePath doesn't throw an error when file has no extension;
+- Fix: OpenDocument by URL doesn't work if URL have spaces
 
 ## 2021-07-30
 - Fix: Implemented a completion handler to indentify when the preview document is dismissed. [RMET-740](https://outsystemsrd.atlassian.net/browse/RMET-912)
