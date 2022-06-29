@@ -1,6 +1,6 @@
 {
   "name": "com.outsystems.plugins.fileviewer",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "OutSystems Cordova Plugin to provide the functionality of a file viewer to mobile applications.",
   "keywords": [
     "ecosystem:cordova",
