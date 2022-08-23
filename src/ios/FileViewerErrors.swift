@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum FileViewerErrors: String, Error {
+enum FileViewerErrors: String, Error, LocalizedError {
     case fileDoesNotExist = "The file you are trying to open does not exist"
     case emptyFileName = "No file name or/and extension was provided"
     case couldNotOpenDocument = "Could not open the document"
@@ -15,8 +15,6 @@ enum FileViewerErrors: String, Error {
     case invalidEmptyURL = "Path of the file to open is either null or empty"
     case downloadFailed = "The download failed"
     case missingFileExtension = "The file has no extension"
-}
 
-extension FileViewerErrors : LocalizedError {
     var errorDescription: String? { return NSLocalizedString(rawValue, comment: "") }
 }
