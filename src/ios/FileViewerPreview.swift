@@ -9,7 +9,7 @@ import Foundation
 import QuickLook
 import AVKit
 
-class FileViewerPreview {
+class FileViewerPreview: QLPreviewControllerDataSource {
     
     lazy var previewItem = NSURL()
     weak var viewController: UIViewController?
@@ -54,15 +54,12 @@ class FileViewerPreview {
             playerViewController.player!.play()
         }
     }
-    
-}
 
-//MARK:- QLPreviewController DataSource
-extension FileViewerPreview: QLPreviewControllerDataSource {
+    // MARK: - QLPreviewController DataSource
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         return 1
     }
-    
+
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         return self.previewItem as QLPreviewItem
     }

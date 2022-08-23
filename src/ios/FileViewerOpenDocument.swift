@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FileViewerOpenDocument: NSObject {
+class FileViewerOpenDocument: NSObject, UIDocumentInteractionControllerDelegate {
     
     var documentInteractionController:UIDocumentInteractionController?
     weak var viewController: UIViewController?
@@ -45,17 +45,14 @@ class FileViewerOpenDocument: NSObject {
         self.documentInteractionController?.presentPreview(animated: true)
     }
     
-}
-
-extension FileViewerOpenDocument: UIDocumentInteractionControllerDelegate {
-    //MARK: UIDocumentInteractionControllerDelegate
+    // MARK: - UIDocumentInteractionControllerDelegate
+        
     func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
         return self.viewController!
     }
-    
 }
 
-extension URL {
+fileprivate extension URL {
     var uti: String {
         return (try? self.resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier ?? "public.data"
     }
