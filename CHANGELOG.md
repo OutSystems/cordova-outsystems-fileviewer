@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### 07-11-2024a
+### 07-11-2024
 - Fix: Opening files on Android apps built with MABS 11 
 
 ## [Version 1.0.6]
