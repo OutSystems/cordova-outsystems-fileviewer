@@ -29,6 +29,7 @@
     <source-file src="src/android/com/outsystems/plugins/fileviewer/OSOpenFileChooser.java" target-dir="src/com/outsystems/plugins/fileviewer"/>
     <source-file src="src/android/com/outsystems/plugins/fileviewer/OSPreviewDocument.java" target-dir="src/com/outsystems/plugins/fileviewer"/>
     <source-file src="src/android/com/outsystems/plugins/fileviewer/OSGetMimeType.java" target-dir="src/com/outsystems/plugins/fileviewer"/>
+    <source-file src="src/android/com/outsystems/plugins/fileviewer/OSFileProvider.java" target-dir="src/com/outsystems/plugins/fileviewer"/>
     <source-file src="src/android/xml/file_viewer_paths.xml" target-dir="res/xml"/>
   </platform>
   <platform name="ios">
